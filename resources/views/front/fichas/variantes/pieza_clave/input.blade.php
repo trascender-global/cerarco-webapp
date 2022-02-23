@@ -1,0 +1,1 @@
+{{ $dato->valor ?? ($dato['valor'] ?? '') }}

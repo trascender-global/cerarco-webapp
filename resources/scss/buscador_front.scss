@@ -1,0 +1,118 @@
+@mixin fontTabs($theme: #fff) {
+  color: $theme !important;
+  font-size: 1.1rem !important;
+}
+
+@mixin colorTabInternos($background_color: #fff, $lighten: 12%) {
+  .nav-tabs-custom {
+    font-size: 1.07rem !important;
+
+    span {
+      color: #535353;
+    }
+
+    .active span {
+      color: #fff;
+    }
+
+    .active{
+      background-color: lighten($background_color, $lighten) !important;
+      font-weight: bolder;
+    }
+
+  }
+
+  .flex-column .active{
+    color: #fff !important;
+    background-color: lighten($background_color, $lighten) !important;
+    font-weight: bolder;
+  }
+
+  .flex-column a:hover{
+    color: #505d69;
+  }
+
+  .card{
+    font-size: 10pt !important;
+  }
+
+
+}
+
+$modelo: #008670;
+$forma: #dc5138;
+$decorativa: #ff822a;
+$arqueometrica: #c9d700;
+$pieza_clave: #148099;
+
+.marker_map {
+  // background-image: url('mapbox-icon.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.items {
+  width: 90%;
+  margin: 100px auto 0px;
+}
+
+.slick-slide {
+  margin: 10px
+}
+
+.slick-slide img {
+  width: 100%;
+  border: 0 solid #fff
+}
+
+.tab_modelo {
+  background-color: $modelo !important;
+  @include fontTabs;
+}
+
+.tab_forma {
+  background-color: $forma !important;
+  @include fontTabs;
+}
+
+.tab_decorativa {
+  background-color: $decorativa !important;
+  @include fontTabs;
+}
+
+.tab_arqueometrica {
+  background-color: $arqueometrica !important;
+  @include fontTabs;
+}
+
+.tab_pieza_clave {
+  background-color: $pieza_clave !important;
+  @include fontTabs;
+}
+
+.tabs-busqueda {
+  margin-right: 6px;
+}
+
+.tab_modelo {
+  @include colorTabInternos($modelo);
+}
+
+.tab_forma {
+  @include colorTabInternos($forma);
+}
+
+.tab_decorativa {
+  @include colorTabInternos($decorativa);
+}
+
+.tab_arqueometrica {
+  @include colorTabInternos($arqueometrica, 1%);
+}
+
+.tab_pieza_clave {
+  @include colorTabInternos($pieza_clave);
+}
