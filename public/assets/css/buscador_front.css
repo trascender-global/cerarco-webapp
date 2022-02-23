@@ -1,0 +1,211 @@
+.marker_map {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.items {
+  width: 90%;
+  margin: 100px auto 0px;
+}
+
+.slick-slide {
+  margin: 10px;
+}
+
+.slick-slide img {
+  width: 100%;
+  border: 0 solid #fff;
+}
+
+.tab_modelo {
+  background-color: #008670 !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+}
+
+.tab_forma {
+  background-color: #dc5138 !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+}
+
+.tab_decorativa {
+  background-color: #ff822a !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+}
+
+.tab_arqueometrica {
+  background-color: #c9d700 !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+}
+
+.tab_pieza_clave {
+  background-color: #148099 !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+}
+
+.tabs-busqueda {
+  margin-right: 6px;
+}
+
+.tab_modelo .nav-tabs-custom {
+  font-size: 1.07rem !important;
+}
+
+.tab_modelo .nav-tabs-custom span {
+  color: #535353;
+}
+
+.tab_modelo .nav-tabs-custom .active span {
+  color: #fff;
+}
+
+.tab_modelo .nav-tabs-custom .active {
+  background-color: #00c3a3 !important;
+  font-weight: bolder;
+}
+
+.tab_modelo .flex-column .active {
+  color: #fff !important;
+  background-color: #00c3a3 !important;
+  font-weight: bolder;
+}
+
+.tab_modelo .flex-column a:hover {
+  color: #505d69;
+}
+
+.tab_modelo .card {
+  font-size: 10pt !important;
+}
+
+.tab_forma .nav-tabs-custom {
+  font-size: 1.07rem !important;
+}
+
+.tab_forma .nav-tabs-custom span {
+  color: #535353;
+}
+
+.tab_forma .nav-tabs-custom .active span {
+  color: #fff;
+}
+
+.tab_forma .nav-tabs-custom .active {
+  background-color: #e57f6c !important;
+  font-weight: bolder;
+}
+
+.tab_forma .flex-column .active {
+  color: #fff !important;
+  background-color: #e57f6c !important;
+  font-weight: bolder;
+}
+
+.tab_forma .flex-column a:hover {
+  color: #505d69;
+}
+
+.tab_forma .card {
+  font-size: 10pt !important;
+}
+
+.tab_decorativa .nav-tabs-custom {
+  font-size: 1.07rem !important;
+}
+
+.tab_decorativa .nav-tabs-custom span {
+  color: #535353;
+}
+
+.tab_decorativa .nav-tabs-custom .active span {
+  color: #fff;
+}
+
+.tab_decorativa .nav-tabs-custom .active {
+  background-color: #ffa667 !important;
+  font-weight: bolder;
+}
+
+.tab_decorativa .flex-column .active {
+  color: #fff !important;
+  background-color: #ffa667 !important;
+  font-weight: bolder;
+}
+
+.tab_decorativa .flex-column a:hover {
+  color: #505d69;
+}
+
+.tab_decorativa .card {
+  font-size: 10pt !important;
+}
+
+.tab_arqueometrica .nav-tabs-custom {
+  font-size: 1.07rem !important;
+}
+
+.tab_arqueometrica .nav-tabs-custom span {
+  color: #535353;
+}
+
+.tab_arqueometrica .nav-tabs-custom .active span {
+  color: #fff;
+}
+
+.tab_arqueometrica .nav-tabs-custom .active {
+  background-color: #cedc00 !important;
+  font-weight: bolder;
+}
+
+.tab_arqueometrica .flex-column .active {
+  color: #fff !important;
+  background-color: #cedc00 !important;
+  font-weight: bolder;
+}
+
+.tab_arqueometrica .flex-column a:hover {
+  color: #505d69;
+}
+
+.tab_arqueometrica .card {
+  font-size: 10pt !important;
+}
+
+.tab_pieza_clave .nav-tabs-custom {
+  font-size: 1.07rem !important;
+}
+
+.tab_pieza_clave .nav-tabs-custom span {
+  color: #535353;
+}
+
+.tab_pieza_clave .nav-tabs-custom .active span {
+  color: #fff;
+}
+
+.tab_pieza_clave .nav-tabs-custom .active {
+  background-color: #1badcf !important;
+  font-weight: bolder;
+}
+
+.tab_pieza_clave .flex-column .active {
+  color: #fff !important;
+  background-color: #1badcf !important;
+  font-weight: bolder;
+}
+
+.tab_pieza_clave .flex-column a:hover {
+  color: #505d69;
+}
+
+.tab_pieza_clave .card {
+  font-size: 10pt !important;
+}
+
