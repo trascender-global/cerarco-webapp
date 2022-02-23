@@ -1,0 +1,56 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: felipe
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: icanh-admin
+    container_name: icanh-admin-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - icanh-admin
+
+  db:
+    image: mysql:5.7
+    container_name: icanh-admin-db
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - 30066:3306
+    volumes:
+      - dbdata_admin:/var/lib/mysql
+    networks:
+      - icanh-admin
+
+  nginx:
+    image: nginx:alpine
+    container_name: icanh-admin-nginx
+    restart: unless-stopped
+    ports:
+      - 8089:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - icanh-admin
+
+networks:
+  icanh-admin:
+    driver: bridge
+
+volumes:
+  dbdata_admin:
+    driver: local
