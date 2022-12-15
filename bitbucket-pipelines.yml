@@ -1,0 +1,22 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: php:7.2.34
+pipelines:
+  # default - contains the steps that will run on every push.
+  # default:
+  branches:
+   # You can include your custom branches and the steps you'd like to undertake e.g. testing
+   #staging:
+   master:
+    - step:
+       name: Rama master
+       script:
+         - pipe: atlassian/ssh-run:0.2.2
+           variables:
+             SSH_USER: 'micros'
+             SERVER: '68.183.136.51'
+             PORT: '57665'
+             COMMAND: './deployApi-master-portal.sh'

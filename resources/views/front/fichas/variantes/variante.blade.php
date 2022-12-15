@@ -2,17 +2,21 @@
     <div class="card-body">
         <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
             @foreach($modeloMetaData as $modelo => $data)
+            @if(!empty(trim($modelo)))
                 <li class="nav-item">
-                    <a class="nav-link @if($loop->first) active @endif " data-toggle="tab" href="#{{ $variante }}-{{ $modelo }}" role="tab">
-                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                        <span class="d-none d-sm-block">{{ !empty(trim($modelo)) ? $modelo : '---' }}</span>
-                    </a>
-                </li>
+                        <a class="nav-link @if($loop->first) active @endif " data-toggle="tab" href="#{{ $variante }}-{{ $modelo }}" role="tab">
+                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                            <span class="d-none d-sm-block">{{ !empty(trim($modelo)) ? $modelo : '---' }}</span>
+                        </a>
+                    </li>
+            @endif
+                
             @endforeach
-        </ul>
+        </ul> 
 
         <div class="tab-content p-3 text-muted">
             @foreach($modeloMetaData as $modelo => $info)
+               @if(!empty(trim($modelo))) 
                 <div class="tab-pane @if($loop->first) active @endif" id="{{ $variante }}-{{ $modelo }}" role="tabpanel">
                     <div class="checkout-tabs">
                         <div class="row">
@@ -42,7 +46,22 @@
                                             @endforeach
                                             <div class="tab-pane fade" id="datos-variante-{{ $variante }}-{{ $modelo }}-fotografías-y-dibujos" role="tabpanel" aria-labelledby="datos-variante-tab-{{ $variante }}-{{ $modelo }}-fotografías-y-dibujos">
                                                 <div class="shadow-none mb-0">
-                                                    @include('front.fichas.variantes.pieza_clave.fotografias_variante',['modelo' => $modeloModel, 'variante' => $variante, 'varianteCodigo' => $modelo ])
+                                                    <?php $pieza_clave_id_=0 ;?>
+                                                    @foreach($info as $data)
+                                                        @if($loop->first)
+                                                            @foreach($data as $data_)
+                                                                @if($loop->first)
+                                                                    @foreach($data_ as $d)
+                                                                        @if($loop->first)
+                                                                        <?php $pieza_clave_id_= $d;?>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+
+                                                    @include('front.fichas.variantes.pieza_clave.fotografias_variante',['modelo' => $modeloModel, 'variante' => $variante, 'varianteCodigo' => $modelo ,'pieza_clave'=>$pieza_clave_id_])
                                                 </div>
                                             </div>
 
@@ -58,6 +77,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
     </div>

@@ -6,7 +6,7 @@
     </div>
 </div>
 <script>
-    mapboxgl.accessToken = '{{ env('MAP_TOKEN') }}';
+    mapboxgl.accessToken = 'pk.eyJ1IjoibHVtaWNhbWUzMyIsImEiOiJja3p3eDdqdmw0a21tMnZwYWJjcHZydnVkIn0.ju_prCiuR_L-7wWftgW4QQ';
     var map = new mapboxgl.Map({
         container: 'mapa',
         style: 'mapbox://styles/mapbox/streets-v11',

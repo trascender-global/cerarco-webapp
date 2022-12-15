@@ -116,7 +116,7 @@
                                                 </span>
                                         </div>
                                     </a>
-                                    <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"> 
                                         <div class="card-body">
                                             <div class="form-check mb-3">
                                                 <div>
@@ -354,7 +354,8 @@
                                                     <select class="select2 form-control select2-multiple"
                                                             multiple="multiple"
                                                             data-placeholder=""
-                                                            name="clasificaciones_existentes_area_geografica[]">
+                                                            name="clasificaciones_existentes_area_geografica[]"
+                                                            id="clasificaciones_existentes_area_geografica">
                                                         <option disabled>Seleccione</option>
                                                         @foreach(getAreasGeograficas() as $data)
                                                             <option value="{{ $data->slug }}">{{ $data->valor }}</option>
@@ -366,12 +367,26 @@
                                                     <select class="select2 form-control select2-multiple"
                                                             multiple="multiple"
                                                             data-placeholder=""
-                                                            name="clasificaciones_existentes_sub_region_geografica[]">
+                                                            name="clasificaciones_existentes_sub_region_geografica[]"
+                                                            id="clasificaciones_existentes_sub_region_geografica">
                                                         <option disabled>Seleccione</option>
                                                         @foreach(getSubRegionGeografica() as $data)
                                                             <option value="{{ $data->slug }}">{{ $data->valor }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                                <div>
+                                                    <label class="form-check-label gris" for="exampleRadios3">Clasificacion Existente</label>
+                                                    <select class="select2 form-control select2-multiple"
+                                                            data-placeholder=""
+                                                            multiple="multiple"
+                                                            name="clasificaciones_existentes_name[]"
+                                                            id="clasificaciones_existentes">
+                                                        <option disabled>Seleccione</option>
+                                                      
+                                                    </select>
+
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -389,9 +404,15 @@
 
             <!-- Mapa -->
             <div class="col-lg-7 offset-lg-1 text-center">
+                <div class="row text-center">
+
+                   <input type="checkbox" name="" id="active_stoke" value="Activar limites" checked>
+                   <label>Activar limites departamentales</label>  
+                </div>
+               
                 @include('front.page.buscador.mapa')
 
-                <div class="container-fluid p-3">
+                <div class="container-fluid p-3" style="margin-top: 0px;">
                     <!-- Range slider: -->
                     <input
                             id="buscador_cronologia"
@@ -413,7 +434,6 @@
 @section('script')
     <script>
         $(document).ready(function () {
-
             // With JQuery
             $(".image-checkbox").each(function () {
                 if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
@@ -421,6 +441,62 @@
                 } else {
                     $(this).removeClass('image-checkbox-checked');
                 }
+            });
+
+            $("#clasificaciones_existentes_sub_region_geografica").on("change",function(){
+                var formData = new FormData();
+                formData.append("_token",$('input[name="_token"]').val());
+                formData.append("clasificaciones_existentes_area_geografica",$("#clasificaciones_existentes_area_geografica").val());
+                formData.append("clasificaciones_existentes_sub_region_geografica",$("#clasificaciones_existentes_sub_region_geografica").val());
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('front.buscador.select') }}",
+                    data: formData,  
+                        processData: false,  // tell jQuery not to process the data
+      contentType: false, // Al atributo data se le asigna el objeto FormData.
+      success: function(data) {
+        $('#clasificaciones_existentes').html(data);
+
+
+    },error : function(xhr, status) {
+
+    }
+});
+                
+            });
+            $("#clasificaciones_existentes_area_geografica").on("change",function(){
+                var formData = new FormData();
+                formData.append("_token",$('input[name="_token"]').val());
+                formData.append("clasificaciones_existentes_area_geografica",$("#clasificaciones_existentes_area_geografica").val());
+                formData.append("clasificaciones_existentes_sub_region_geografica",$("#clasificaciones_existentes_sub_region_geografica").val());
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('front.buscador.select') }}",
+                    data: formData,  
+                        processData: false,  // tell jQuery not to process the data
+      contentType: false, // Al atributo data se le asigna el objeto FormData.
+      success: function(data) {
+        $('#clasificaciones_existentes').html(data);
+
+
+    },error : function(xhr, status) {
+
+    }
+});
+                });
+
+            $("#active_stoke").on("change",function(){
+                if ($(this).is(":checked")) {
+                    $('#image_active').css("visibility","initial");
+                   // $('polygon').css('stroke','#00000050');
+                    
+                }else{
+                    $('#image_active').css("visibility","hidden");
+                     //$('polygon').css('stroke','#00000060');
+                }
+               
             });
 
             $(".image-checkbox").on("click", function (e) {

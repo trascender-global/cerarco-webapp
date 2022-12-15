@@ -25,6 +25,7 @@ Route::prefix('glosario')->name('glosario.')->group(function () {
 Route::prefix('buscador')->name('buscador.')->group(function () {
     Route::get('/', 'BuscadorController@buscador')->name('home');
     Route::post('/', 'BuscadorController@obtenerResultados')->name('busqueda');
+    Route::post('/select', 'BuscadorController@obtenerResultadosRender')->name('select');
 });
 
 Route::prefix('ficha')->name('ficha.')->group(function () {

@@ -11,80 +11,62 @@
             </div>
         </div>
             
-            @if(isset($_POST['clasificaciones_existentes_area_geografica'])||isset($_POST['clasificaciones_existentes_sub_region_geografica']))
                <div class="row d-flex w-100">
-            <!-- Mapa -->
-            <div class="col-lg-5 h-100 text-center flex-column">
-                @include('front.page.buscador.mapa-ext', compact('resultados'))
-            </div>
-            <!-- End mapa -->
+               <!-- Mapa -->
+                <div class="col-lg-5 h-100 text-center flex-column">
+                    @include('front.page.buscador.mapa-ext', compact('resultados'))
+                </div>
+                <!-- End mapa -->
             <div class="col-lg-7 h-100 flex-column">
                 <div class="customer-zone mb-30">
                     <div class="card fondo-trans">
                         <div class="card-body">
                             <h5 class="font-size-12 goldentitle">Resultados de la busqueda</h5>
-                           <ul class="list-group">
-                                    @foreach($resultados as $resultado)
-                                    <?php $string=$resultado->piezasClave->first()->datos()->where('posicion',13)->first()->valor;
-                                        $explode=explode(",", $string);?>
-                                    @if($string)
-                                    <li class="list-group-item">
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <label class="imagen_resultados">
-                                                            <a href="{{ route('front.ficha.informacion_ficha', ['modelo'=>$resultado]) }}">
-                                                                <img class="" src="@if( $resultado->fotosPiezasClave->isEmpty() ){{ asset('assets/images/sample.png')}} @else {{ $resultado->fotosPiezasClave->first()->foto }} @endif" height="70"></a>
-                                                            <i class="fa fa-check hidden"></i>
-                                                        </label>
-                                                </div>
-                                                <div class="col-lg-9">
-                                                    <a href="{{ route('front.ficha.informacion_ficha', ['modelo'=>$resultado]) }}">
-                                                        @if($explode)
-                                                        @foreach($explode as $ex)
-                                                        {{ $ex}}<br>
-                                                        @endforeach
-                                                    
-                                                    @else
-                                                    {{$string}}
+                            @if(isset($_POST['clasificaciones_existentes_name']))
+
+                                @if(!$_POST['clasificaciones_existentes_name'][0]=="")
+                                    <?php $counter_=1; ?>
+                                <div class="row">
+                                    <div id="resultados">
+                                        @foreach($resultados as $resultado)
+                                         @if($resultado->piezasClave->first()->datos()->whereIn('valor',$_POST['clasificaciones_existentes_name'])->first())
+                                                         @if($counter_==1 || $counter_ % 2 != 0)
+                                                            <div class="row" >
+                                                            @endif
+                                                        <div class="col-xs-12 col-sm-6 col-md-6 nopad text-center tooltip_busqueda" data-toggle="tooltip" data-placement="top" title="{{ $resultado->codigo }}" >
+                                                            <label class="imagen_resultados">
+                                                                <a href="{{ route('front.ficha.informacion_ficha', ['modelo'=>$resultado]) }}">
+                                                                    <img class="" src="@if( $resultado->fotosPiezasClave->isEmpty() ){{ asset('assets/images/sample.png')}} @else {{ $resultado->fotosPiezasClave->first()->foto }} @endif" style="width: 100px;"></a>
+                                                                <i class="fa fa-check hidden"></i>
+                                                            </label>
+                                                        </div>
+                                                        @if( $counter_ % 2 == 0)
+                                                            </div>
+                                                        @endif
+                                                        <?php $counter_++; ?>
                                                     @endif
-                                                </a>
-                                                </div>
-                                            </div>
-                                            
-                                                    </li>
-                                    @endif
-                                     
+                                                    @if($loop->last)
+                                                    <script type="text/javascript">
+                                                            
+                                                    if (!document.getElementsByClassName("tooltip_busqueda").length % 2 ==0) {
+                                                            document.write("<?php echo'</div>'; ?>");
+                                                            
+                                                        }
+
+                                                    </script>
+                                                    @endif
+                                                    
+                                                    
+                                                   
                                     @endforeach
- 
-</ul>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <a href="{{ route('front.buscador.home') }}" class="btn btn-warning waves-effect waves-light btn-block">Realizar otra búsqueda</a>
-                </div>
-            </div>
-        </div>
-                @else
-               <div class="row d-flex w-100">
-            <!-- Mapa -->
-            <div class="col-lg-5 h-100 text-center flex-column">
-                @include('front.page.buscador.mapa-ext', compact('resultados'))
-            </div>
-            <!-- End mapa -->
- 
-            <!-- Resultados -->
-            <div class="col-lg-7 h-100 flex-column">
-                <div class="customer-zone mb-30">
-                    <div class="card fondo-trans">
-                        <div class="card-body">
-                            <h5 class="font-size-12 goldentitle">Resultados de la busqueda</h5>
-                            <div class="row">
+                                    </div>
+                                </div>
+                                @else
+                                    <div class="row">
                                 <div id="resultados">
                                     @foreach($resultados as $resultado)
                                         @if($loop->first || $loop->odd)
-                                            <div class="row">
+                                            <div class="row" >
                                                 @endif
                                                 <div class="col-xs-12 col-sm-6 col-md-6 nopad text-center tooltip_busqueda" data-toggle="tooltip" data-placement="top" title="{{ $resultado->codigo }}" >
                                                     <label class="imagen_resultados">
@@ -99,6 +81,30 @@
                                     @endforeach
                                 </div>
                             </div>
+                                @endif
+                            
+                            @else
+                            <div class="row">
+                                <div id="resultados">
+                                    @foreach($resultados as $resultado)
+                                        @if($loop->first || $loop->odd)
+                                            <div class="row" >
+                                                @endif
+                                                <div class="col-xs-12 col-sm-6 col-md-6 nopad text-center tooltip_busqueda" data-toggle="tooltip" data-placement="top" title="{{ $resultado->codigo }}" >
+                                                    <label class="imagen_resultados">
+                                                        <a href="{{ route('front.ficha.informacion_ficha', ['modelo'=>$resultado]) }}">
+                                                            <img class="" src="@if( $resultado->fotosPiezasClave->isEmpty() ){{ asset('assets/images/sample.png')}} @else {{ $resultado->fotosPiezasClave->first()->foto }} @endif" style="width: 100px;"></a>
+                                                        <i class="fa fa-check hidden"></i>
+                                                    </label>
+                                                </div>
+                                                @if($loop->last || $loop->even)
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                               
                         </div>
                     </div>
                 </div>
@@ -106,9 +112,7 @@
                     <a href="{{ route('front.buscador.home') }}" class="btn btn-warning waves-effect waves-light btn-block">Realizar otra búsqueda</a>
                 </div>
             </div>
-            <!-- End resultados -->
         </div>
-                @endif
         
     </div>
     <!-- Fin del contenido de la página -->
@@ -131,7 +135,7 @@
                 // alert($('input[name="term"]').val());
             });
 
-            $('#resultados').after('<div id="nav" class="text-center"></div>');
+            $('#resultados').after('<div class="col-12"><div id="nav" class="text-center"></div></div>');
             var rowsShown = 3;
             var rowsTotal = $('.imagen_resultados').length/2;
             var numPages = rowsTotal / rowsShown;

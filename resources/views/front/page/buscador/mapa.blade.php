@@ -69,12 +69,12 @@
         var triggers = svg.getElementsByClassName('tooltip-trigger');
 
         for (var i = 0; i < triggers.length; i++) {
-            showTooltipEver(triggers[i],i);
+            //showTooltipEver(triggers[i],i);
             triggers[i].addEventListener('mousemove', showTooltip);
             triggers[i].addEventListener('mouseout', hideTooltip);
         }
 
-        function showTooltipEver(elemento,i) {
+        /*function showTooltipEver(elemento,i) {
             let coords = elemento.getBoundingClientRect();
 var x_ = coords.left;
 var y_ = coords.top;
@@ -91,15 +91,7 @@ var tooltip = svg.getElementById('tooltipe'+i);
             tooltip.setAttributeNS(null, "visibility", "visible"); 
             }
            
-           // console.log("X-"+x+" - y-"+y+" = H-"+xCenter+" y-"+yCenter);
-            /*tooltip.setAttributeNS(null, "transform", "translate(" + x + " " + y + ")");
-            tooltip.setAttributeNS(null, "visibility", "visible");
-            tooltipText.firstChild.data = evt.target.getAttributeNS(null, "data-tooltip-text");
-            var length = tooltipText.getComputedTextLength() + 10;
-            for (var i = 0; i < tooltipRects.length; i++) {
-                tooltipRects[i].setAttributeNS(null, "width", length + 'px');
-            }*/
-        }
+        }*/
         function getOffset( el ) {
     var _x = 0;
     var _y = 0;

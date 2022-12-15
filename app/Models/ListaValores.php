@@ -79,7 +79,7 @@ class ListaValores extends Model
     {
         return $query->where('lista_id', config('constants.lista_valores.descripcion_formal.forma-base'));
     }
-
+    
     public function scopeComposicionInorganicaAntiplastico($query)
     {
         return $query->where('lista_id', config('constants.lista_valores.petrografia.composicion_inorganica'));

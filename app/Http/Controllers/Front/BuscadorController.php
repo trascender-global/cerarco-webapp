@@ -28,7 +28,17 @@ class BuscadorController extends Controller
         session()->forget('todos');
         return view('front.page.results', compact('resultados'));
     }
+public function obtenerResultadosRender(Request $request)
+    {
+        session()->flash('todos', DB::table('pieza_clave_datos')
+            ->select('pieza_clave_id')
+            ->distinct()
+            ->get());
 
+        $resultados = self::obtenerModelosBusqueda(self::obtenerBusquedaQuery());
+        session()->forget('todos');
+        return view('front.page.buscador.select_render', compact('resultados'))->render();
+    }
     public function buscador(Request $request)
     {
         return view('front.page.buscador');

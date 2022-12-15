@@ -1,4 +1,4 @@
-@if($modelo->fotos->isNotEmpty() && $modelo->fotos()->variante($variante)->count() > 0 )
+@if($modelo->piezasClave()->first()->fotos()->piezaClave($modelo->piezasClave()->first()->id)->count() > 0 || $modelo->piezasClave()->first()->dibujos()->piezaClave($modelo->piezasClave()->first()->id)->count() > 0 )
     @php $hash = Illuminate\Support\Str::random(40); @endphp
     <div class="row">
         <div class="col-lg-9"></div>
@@ -13,18 +13,48 @@
     </div>
     <div id="{{ $hash.'1' }}" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
+            <?php $index=0; ?>
+            
+            @foreach($modelo->piezasClave as $pieza_clave)
+                @foreach($pieza_clave->fotos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                    <li data-target="#{{ $hash.'1' }}" data-slide-to="{{ $index }}" class="@if($index==0) active @endif"></li>
+                    <?php $index=$index+1; ?>
+                @endforeach
+                @foreach($pieza_clave->dibujos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                    <li data-target="#{{ $hash.'1' }}" data-slide-to="{{ $index }}" ></li>
+                    <?php $index=$index+1; ?>
+                @endforeach
+            @endforeach
             @foreach($modelo->fotos()->variante($variante)->orderBy('posicion')->get() as $foto)
-                <li data-target="#{{ $hash.'1' }}" data-slide-to="{{ $loop->index }}" class="@if( $loop->first ) active @endif"></li>
+                <li data-target="#{{ $hash.'1' }}" data-slide-to="{{ $index }}" ></li>
+                 <?php $index=$index+1; ?>
             @endforeach
         </ol>
         <div class="carousel-inner">
+            <?php $index=0; ?>
+            @foreach($modelo->piezasClave as $pieza_clave)
+                @foreach($pieza_clave->dibujos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                    <div class="carousel-item @if( $index===0 ) active @endif">
+                    <img class="d-block w-100" src="{{ $foto->foto }}" alt="First slide" >
+                </div>
+                <?php $index=$index+1; ?>
+                @endforeach
+                 @foreach($pieza_clave->fotos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                    <div class="carousel-item @if( $index===0 ) active @endif">
+                    <img class="d-block w-100" src="{{ $foto->foto }}" alt="First slide" >
+                </div>
+                <?php $index=$index+1; ?>
+                @endforeach
+                
+            @endforeach
             @foreach($modelo->fotos()->variante($variante)->orderBy('posicion')->get() as $foto)
-                <div class="carousel-item @if( $loop->first ) active @endif">
+                <div class="carousel-item @if( $index===0 ) active @endif">
                     <img class="d-block w-100" src="{{ $foto->name }}" alt="First slide" >
                 </div>
+                <?php $index=$index+1; ?>
             @endforeach
         </div>
-        @if( $modelo->fotos()->variante($variante)->count() > 1 )
+        @if( $modelo->piezasClave()->first()->fotos()->piezaClave($modelo->piezasClave()->first()->id)->count() > 1 || $modelo->piezasClave()->first()->dibujos()->piezaClave($modelo->piezasClave()->first()->id)->count() > 1)
             <a class="carousel-control-prev" href="#{{ $hash.'1' }}" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Anterior</span>
@@ -48,22 +78,53 @@
                 </svg>
             </a>
             <div class="modal-body">
-
+<?php $index=0; ?>
                 <div id="{{$hash}}" class="carousel slide" data-ride="carousel" data-interval="false">
                     <ol class="carousel-indicators">
+                        
+                        @foreach($modelo->piezasClave as $pieza_clave)
+                            @foreach($pieza_clave->fotos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                                <li data-target="#{{ $hash }}" data-slide-to="{{ $index }}" class="@if($index==0) active @endif"></li>
+                                <?php $index=$index+1; ?>
+                            @endforeach
+                            @foreach($pieza_clave->dibujos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                                <li data-target="#{{ $hash }}" data-slide-to="{{ $index }}" ></li>
+                                <?php $index=$index+1; ?>
+                            @endforeach
+                        @endforeach
                         @foreach($modelo->fotos()->variante($variante)->orderBy('posicion')->get() as $foto)
-                        <li data-target="#{{ $hash }}" data-slide-to="{{ $loop->index }}" class="@if( $loop->first ) active @endif"></li>
+                        <li data-target="#{{ $hash }}" data-slide-to="{{ $index }}" class=""></li>
+                        <?php $index=$index+1; ?>
                         @endforeach
                     </ol>
                     <div class="carousel-inner">
+                        <?php $index=0; ?>
+            @foreach($modelo->piezasClave as $pieza_clave)
+            
+                        @foreach($pieza_clave->dibujos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                            <div class="carousel-item @if( $index==0 ) active @endif">
+                            <img class="d-block w-100" src="{{ $foto->foto }}" alt="First slide" >
+
+                        </div>
+                        <?php $index=$index+1; ?>
+                        @endforeach
+                         @foreach($pieza_clave->fotos()->piezaClave($pieza_clave->id)->orderBy('posicion')->get() as $foto)
+                            <div class="carousel-item @if( $index==0 ) active @endif" >
+                            <img class="d-block w-100" src="{{ $foto->foto }}" alt="First slide" >
+                        </div>
+                        <?php $index=$index+1; ?>
+                        @endforeach
+                            
+            @endforeach
             @foreach($modelo->fotos()->variante($variante)->orderBy('posicion')->get() as $foto)
-                <div class="carousel-item @if( $loop->first ) active @endif">
+                <div class="carousel-item @if( $index==0 ) active @endif">
                     <img class="d-block w-100" src="{{ $foto->name }}" alt="First slide" >
                 </div>
+                <?php $index=$index+1; ?>
             @endforeach
         </div>
 
-                    @if($modelo->fotos()->variante($variante)->count() > 1)
+                    @if($modelo->piezasClave()->first()->fotos()->piezaClave($modelo->piezasClave()->first()->id)->count() > 1 || $modelo->piezasClave()->first()->dibujos()->piezaClave($modelo->piezasClave()->first()->id)->count() > 1)
                     <a class="carousel-control-prev" href="#{{ $hash }}" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Anterior</span>

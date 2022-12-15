@@ -79,6 +79,14 @@ if (!function_exists('getFormaBase')) {
     }
 }
 
+if (!function_exists('getClasificaionesExistentes')) {
+    function getClasificaionesExistentes()
+    {
+        return cache_lista_valores('clasificacion_existente', 'clasificacionExistente');
+    }
+}
+
+
 if (!function_exists('getComposicionInorganicaAntiplastico')) {
     function getComposicionInorganicaAntiplastico()
     {

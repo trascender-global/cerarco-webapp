@@ -10,7 +10,7 @@ use Illuminate\Http\File;
 use Illuminate\Http\Request;
 
 class Fichas
-{
+{ 
 
     use ImageTrait;
 
