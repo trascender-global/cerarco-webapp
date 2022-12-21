@@ -46,7 +46,10 @@ class FichasController extends Controller
     {
         return view('admin.fichas.subir_ficha');
     }
-
+    function crearFicha(Request $request)
+    {
+        return view('admin.fichas.crear_ficha');
+    }
     function subirArchivoFicha(Request $request)
     {
         if ($request->hasFile('ficha')) {

@@ -22,8 +22,11 @@
                     </div>
                     <script>
                         function salvarFicha(element) {
-                            $.post("{{ route('admin.ficha.modificarCampo') }}/?pieza=" + element.data('pieza_clave') +
-                                '&slug=' + element.attr('id') + '&val=' + element.val());
+                            $.ajax({url: "{{ route('admin.ficha.modificarCampo') }}/?pieza=" + element.data('pieza_clave') +
+                                '&slug=' + element.attr('id') + '&val=' + element.val(),
+                                type: 'post',
+                                dataType: 'json'
+                            });
                         }
                     </script>
                 @endforeach

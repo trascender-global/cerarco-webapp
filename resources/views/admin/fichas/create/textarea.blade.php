@@ -1,0 +1,1 @@
+<textarea class="form-control" id="{{ $campo->slug }}_{{$index}}" name="{{ $campo->slug }}_{{$index}}" rows="3" placeholder="" data-pieza_clave="{{ $pieza_clave->id ?? null }}">{{ $dato ->valor ?? '' }}</textarea>

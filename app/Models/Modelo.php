@@ -32,7 +32,10 @@ class Modelo extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
+    public function forum()
+    {
+        return $this->belongsTo(Forum::class);
+    }
     public function getFotosPiezasClaveAttribute()
     {
         $fotos = collect();

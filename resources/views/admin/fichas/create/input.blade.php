@@ -1,0 +1,1 @@
+<input class="form-control" required type="text" value="{{ $dato ->valor ?? '' }}" id="{{ $campo->slug }}_{{$index}}" name="{{ $campo->slug }}_{{$index}}" data-pieza_clave="{{ $pieza_clave->id ?? null }}">
