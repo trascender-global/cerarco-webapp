@@ -16,6 +16,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('admin.ficha.subir_ficha')}}"><i class="bx bx-upload"></i> Cargar Ficha</a></li>
+                        <li><a href="{{route('admin.ficha.crear_ficha')}}"><i class="bx bx-add-to-queue"></i> Agregar Ficha</a></li>
                         <li><a href="{{route('admin.ficha.listado')}}"><i class="bx bx-edit"></i> Listado Fichas</a></li>
                     </ul>
                 </li>

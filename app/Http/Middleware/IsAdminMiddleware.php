@@ -24,6 +24,13 @@ class IsAdminMiddleware
         if( $this->isAdmin() ) {
             return $next($request);
         }
+        if( $this->isEditor() ) {
+            return $next($request);
+        }
+        if( $this->isUser() ) {
+            return redirect('/');
+        }
+
 
         Auth::logout();
         return redirect()

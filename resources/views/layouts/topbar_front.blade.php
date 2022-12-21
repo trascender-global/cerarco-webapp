@@ -21,6 +21,9 @@
                             <a href="{{ route('admin.login') }}">
                                 <i class="icon-user"></i>
                             </a>
+                                @if(Auth::user())
+                                    {{Auth::user()->name}}
+                                @endif
                         </div>
                         <div class="header-right-items d-none d-md-block">
                             <a href="{{ url('/') }}" class="header-cart">

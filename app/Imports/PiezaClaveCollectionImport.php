@@ -41,7 +41,7 @@ class PiezaClaveCollectionImport implements ToCollection
                     $piezaClave = self::createPiezaClave($valor, $modelo);
                     $piezaClave->dibujos()->delete();
                     $piezaClave->fotos()->delete();
-                    continue;
+                    continue; 
                 }
 
                 $piezaClaveDato = self::createPiezaClaveDato($piezaClave, $campo, $valor, $config);
