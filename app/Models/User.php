@@ -77,4 +77,12 @@ class User extends Authenticatable
         // return parent::sendPasswordResetNotification($token);
         $this->notify(new ResetPasswordNotification($token));
     }
+    public function forum_topics()
+    {
+        return $this->hasMany(ForumTopic::class);
+    }
+    public function topic_messages()
+    {
+        return $this->hasMany(TopicMessage::class);
+    }
 }

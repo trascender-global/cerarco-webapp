@@ -19,6 +19,9 @@ Route::middleware('is-admin')
             Route::get("subir_ficha/", "FichasController@subirFicha")
                 ->name('subir_ficha');
 
+            Route::get("creat_ficha/", "FichasController@crearFicha")
+                ->name('crear_ficha');
+
             Route::post("subir_ficha/", "FichasController@subirArchivoFicha")
                 ->name('subir_archivo_ficha');
 

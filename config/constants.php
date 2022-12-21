@@ -10,7 +10,8 @@ return [
     'roles'                  => [
         'super_admin' => 1,
         'admin'       => 2,
-        'user'        => 3
+        'user'        => 3,
+        'editor'      =>4
     ],
     'departamentos'          => [
         '05' => 1, // Antioquia
