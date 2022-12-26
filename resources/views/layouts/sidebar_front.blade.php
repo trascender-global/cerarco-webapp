@@ -22,9 +22,6 @@
         <li class="has-children">
             <a href="{{ route('front.noticias.noticias') }}">Noticias</a>
         </li>
-        <li class="has-children">
-            <a href="{{ route('front.noticias.noticias') }}">Foro</a>
-        </li>
         @if(false)
         <li class="has-children">
             <a href="404_e">Fotogalería</a>
