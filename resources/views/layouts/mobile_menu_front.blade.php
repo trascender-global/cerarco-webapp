@@ -51,7 +51,7 @@
                         </ul>
                     </li>
                     <li class="has-children">
-                        <a href="{{ route('front.noticias.noticias') }}">Foro</a>
+                        <a href="{{ route('front.foro.foro') }}">Foro</a>
                         <ul class="sub-menu">
                             <li><a href="#"><span>Item</span></a></li>
                             <li><a href="#"><span>Item</span></a></li>
