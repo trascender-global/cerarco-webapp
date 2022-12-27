@@ -56,3 +56,7 @@ Route::prefix('talleres_virtules')->name('talleres_virtules.')->group(function (
 Route::prefix('como_usar_calalogo')->name('como_usar_calalogo.')->group(function () {
     Route::get('/', 'ComoUsarCatalogoController@usarCatalogo')->name('como_usar_calalogo');
 });
+
+Route::prefix('foro')->name('foro.')->group(function () {
+    Route::get('/', 'ForoController@foro')->name('foro');
+});
