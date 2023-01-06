@@ -1,7 +1,126 @@
+<style>
+    @media (max-width: 768px) {
+        .model-title {
+            height: auto !important;
+            margin: 0px 20px 26px 30px !important;
+        }
+    }
+
+    .model-title {
+        height: auto;
+        background-color: #00867026;
+        border: none;
+        border-radius: 13px;
+        text-align: center;
+        font-size: 20px;
+        color: #008670;
+        cursor: text !important;
+        margin: 0px 0px 26px 0px;
+    }
+
+    .model-description-title {
+        font-size: 17px;
+        font-weight: 600;
+        color: #008670;
+        margin-top: 39px;
+    }
+
+    .model-description {
+        font-size: 17px;
+        font-weight: 300;
+        color: #82858B;
+        margin-top: 39px;
+    }
+
+    .line {
+        border-left: 5px solid #E2E2E2;
+        height: 524px;
+        margin: 10px 0px 41px 0px;
+    }
+</style>
+
 <div class="card">
     <div class="card-body">
         <div class="checkout-tabs">
             <div class="row">
+                <div class="d-flex flex-column flex-md-row">
+                    <div class="col-md-4 ml-sm-1 ml-md-2">
+                        <button type="button" class="model-title">
+                            Descripción formal
+                        </button>
+                        @php
+                            $descriptions = array (
+                            array("Forma Base","Copa"),
+                            array("Boca","Circular"),
+                            array("Borde","Evertido, Recto"),
+                            array("Labio","Concavo"),
+                            array("Cuello","Evertido"),
+                            array("Hombro","Angular"),
+                            array("Cuerpo","Arquillado, Semiesférico"),
+                            array("Soporte","Cilíndrico, Pedestal"),
+                            array("Observaciones","El cuerpo de la copa es un plato aquillado de borde evertido o un cuenco aquillado o semiglobular. Cuando el cuerpo es un plato aquillado, la decoración excisa se encuentra sólo en el soporte; cuando es un cuenco la decoración se encuentra también en el borde"),
+                            );
+                        @endphp
+                        @foreach($descriptions as $description)
+                            <p>
+                                <span class="model-description-title">{{ $description[0] }}:</span>
+                                <span class="model-description">{{ $description[1] }}</span>
+                            </p>
+                        @endforeach
+                    </div>
+                    <div class="line d-none d-md-block"></div>
+                    <div class="col-md-4 ml-sm-1 ml-md-4">
+                        <button type="button" class="model-title">
+                            Decoración
+                        </button>
+                        @php
+                            $descriptions = array (
+                            array("Forma Base","Copa"),
+                            array("Boca","Circular"),
+                            array("Borde","Evertido, Recto"),
+                            array("Labio","Concavo"),
+                            array("Cuello","Evertido"),
+                            array("Hombro","Angular"),
+                            array("Cuerpo","Arquillado, Semiesférico"),
+                            array("Soporte","Cilíndrico, Pedestal"),
+                            array("Observaciones","El cuerpo de la copa es un plato aquillado de borde evertido o un cuenco aquillado o semiglobular. Cuando el cuerpo es un plato aquillado, la decoración excisa se encuentra sólo en el soporte; cuando es un cuenco la decoración se encuentra también en el borde"),
+                            );
+                        @endphp
+                        @foreach($descriptions as $description)
+                            <p>
+                                <span class="model-description-title">{{ $description[0] }}:</span>
+                                <span class="model-description">{{ $description[1] }}</span>
+                            </p>
+                        @endforeach
+                    </div>
+                    <div class="line d-none d-md-block"></div>
+                    <div class="col-md-3 ml-sm-1 ml-md-4">
+                        <button type="button" class="model-title">
+                            Descripción Técnica
+                        </button>
+                        @php
+                            $descriptions = array (
+                            array("Forma Base","Copa"),
+                            array("Boca","Circular"),
+                            array("Borde","Evertido, Recto"),
+                            array("Labio","Concavo"),
+                            array("Cuello","Evertido"),
+                            array("Hombro","Angular"),
+                            array("Cuerpo","Arquillado, Semiesférico"),
+                            array("Soporte","Cilíndrico, Pedestal"),
+                            array("Observaciones","El cuerpo de la copa es un plato aquillado de borde evertido o un cuenco aquillado o semiglobular. Cuando el cuerpo es un plato aquillado, la decoración excisa se encuentra sólo en el soporte; cuando es un cuenco la decoración se encuentra también en el borde"),
+                            );
+                        @endphp
+                        @foreach($descriptions as $description)
+                            <p>
+                                <span class="model-description-title">{{ $description[0] }}:</span>
+                                <span class="model-description">{{ $description[1] }}</span>
+                            </p>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Before items -->
                 <div class="col-xl-2 col-sm-3">
                     <div class="nav flex-column nav-pills" id="datos-variante-{{ $variante }}" role="tablist" aria-orientation="vertical">
                         @foreach($modeloMetaData as $tab => $data)
@@ -45,6 +164,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- End before items -->
             </div>
         </div>
     </div>
