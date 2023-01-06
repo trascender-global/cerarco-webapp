@@ -39,6 +39,11 @@ class Contenido extends Model
         return $query->where('tipo', 'noticias');
     }
 
+    public function scopeForo($query)
+    {
+        return $query->where('tipo', 'foro');
+    }
+
     public function getImagenAttribute($value): string
     {
         return !empty($value) ? asset( 'assets/contenidos/'.$value ) : '';

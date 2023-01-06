@@ -23,7 +23,7 @@
             <a href="{{ route('front.noticias.noticias') }}">Noticias</a>
         </li>
         <li class="has-children">
-            <a href="{{ route('front.noticias.noticias') }}">Foro</a>
+            <a href="{{ route('front.foro.foro') }}">Foro</a>
         </li>
         @if(false)
         <li class="has-children">
