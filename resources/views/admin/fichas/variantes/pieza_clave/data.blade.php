@@ -1,1 +1,1 @@
-<input class="form-control actualizar_dato_variante" type="text" value="{{ $dato['valor'] ?? '' }}" data-tab="{{ $tab }}" data-seccion="{{ $seccion }}" data-campo="{{ $nombre }}" data-modelo="{{ $modelo->getAttribute('id') }}" data-variante="{{ $variante }}" >
+<input class="form-control actualizar_dato_variante" type="text" value="{{ $dato['valor'] ?? '' }}" data-tab="{{ $tab }}" data-seccion="{{ $seccion }}" data-campo="{{ $nombre }}" data-modelo="{{ $modelo->getAttribute('id') }}" data-variante="{{ $variante }}" @if($variante=='modelo') readonly @endif  >

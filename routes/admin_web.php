@@ -16,10 +16,26 @@ Route::middleware('is-admin')
         });
 
         Route::prefix('fichas')->name('ficha.')->group(function () {
+
+            Route::post("render/{type}", "FichasController@Render")
+                ->name('render');
+
+            Route::post("show/fotos", "FichasController@ShowFotos")
+                ->name('show_fotos');
+
+            Route::post("change/variante", "FichasController@ChangeVariante")
+                ->name('change_variante'); 
+
+                Route::post("delete/pieza", "FichasController@eliminarPiezaClaveEdit")
+                ->name('delete_pieza'); 
+
+            Route::post("save_pieza_clave/{len?}", "FichasController@crearPiezaClave")
+                ->name('save_pieza_clave');
+
             Route::get("subir_ficha/", "FichasController@subirFicha")
                 ->name('subir_ficha');
 
-            Route::get("creat_ficha/", "FichasController@crearFicha")
+            Route::get("crear_ficha/", "FichasController@crearFicha")
                 ->name('crear_ficha');
 
             Route::post("subir_ficha/", "FichasController@subirArchivoFicha")
@@ -43,15 +59,16 @@ Route::middleware('is-admin')
             Route::post("{modelo:codigo}/{variante}/mover_fotos/", "FichasController@moverFotos")
                 ->name('mover_fotos');    
 
-            Route::post("/subir_fotos_variante/{modelo:codigo}/{variante}/{varianteCodigo?}", "FichasController@subir_fotos_variante")
+            Route::post("/subir_fotos_variante/{modelo?}/{variante?}/{varianteCodigo?}", "FichasController@subir_fotos_variante")
                 ->name('subir_fotos_variante');
+
             Route::post("/mover_fotos_variante/{modelo:codigo}/{variante}/{varianteCodigo?}", "FichasController@mover_fotos_variante")
                 ->name('mover_fotos_variante');
 
-            Route::post("/{pieza_clave}/subir_fotos_pieza_clave/", "FichasController@subir_fotos_pieza_clave")
+            Route::post("subir_fotos_pieza_clave/", "FichasController@subir_fotos_pieza_clave")
                 ->name('subir_fotos_pieza_clave');
 
-            Route::post("/{pieza_clave}/mover_fotos_pieza_clave/", "FichasController@mover_fotos_pieza_clave")
+            Route::post("mover_fotos_pieza_clave/", "FichasController@mover_fotos_pieza_clave")
                 ->name('mover_fotos_pieza_clave');
 
             Route::post("actualizar_dato_variante/", "FichasController@actualizarDatoVariante")
@@ -73,10 +90,10 @@ Route::middleware('is-admin')
                 ->name('borrar_dibujo_pieza_clave')
                 ->where(['id' => '[0-9]+']);
 
-            Route::post("{pieza_clave:id}/subir_dibujos/", "FichasController@subirDibujos")
+            Route::post("subir_dibujos/{id?}", "FichasController@subirDibujos")
                 ->name('subir_dibujos');
             
-            Route::post("{pieza_clave:id}/mover_dibujos/", "FichasController@moverDibujos")
+            Route::post("mover_dibujos/", "FichasController@moverDibujos")
                 ->name('mover_dibujos');
 
             Route::get("listado/", "FichasController@listadoFichas")

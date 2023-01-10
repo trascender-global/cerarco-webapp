@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use Database\Seeders\CiudadesSeeder;
 use Database\Seeders\DepartamentosSeeder;
@@ -14,6 +15,7 @@ use Database\Seeders\RolesSeeder;
 use Database\Seeders\TipoListasSeeder;
 use Database\Seeders\TruncatePiezaClaveData;
 use Database\Seeders\UsersSeeder;
+use Database\Seeders\NewSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +27,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-        ]);
+        $this->call(NewSeeder::class);
     }
 }

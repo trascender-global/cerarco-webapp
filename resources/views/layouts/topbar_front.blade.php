@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-6">
-            <div class="col-lg-8 col-md-8 col-6">
+                <div class="col-lg-8 col-md-8 col-6">
                         <div class="header-right-side text-right">
                             <div class="header-left-search d-none d-md-block">
                                 <a href="/buscador">
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-        </div>
+            </div>
         </div>
     </div>
 </div>

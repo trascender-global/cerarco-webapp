@@ -115,7 +115,10 @@
                                     <td>{{ $modelo->piezasClave->first()->datos()->busqueda(config('busqueda.decoracion_1'))->get()->first()->getAttribute('valor') }}</td>
                                     <td>{{ $modelo->piezasClave->first()->datos()->busqueda(config('busqueda.decoracion_2'))->get()->first()->getAttribute('valor') }}</td>
                                     <td>{{ $modelo->piezasClave->first()->datos()->busqueda(config('busqueda.decoracion_3'))->get()->first()->getAttribute('valor') }}</td>
-                                    <td>{{ $modelo->piezasClave->first()->datos()->busqueda(config('busqueda.tratamiento_superficie'))->get()->first()->getAttribute('valor') }}</td>
+                                    <td>@if($modelo->piezasClave->first()->datos()->busqueda(config('busqueda.tratamiento_superficie'))->get()->first())
+                                        {{ $modelo->piezasClave->first()->datos()->busqueda(config('busqueda.tratamiento_superficie'))->get()->first()->getAttribute('valor') }}
+                                    @endif
+                                        </td>
                                     <td>
                                         <a class="btn btn-sm btn-info btn-rounded waves-effect waves-light" href="{{ route( 'admin.ficha.editar_ficha', compact('modelo')) }}">
                                             <i class="mdi mdi-pencil d-block font-size-16"></i>

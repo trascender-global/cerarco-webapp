@@ -3,8 +3,10 @@
         <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
             @foreach($modeloMetaData as $modelo => $data)
                 <li class="nav-item">
-                    <a class="nav-link @if($loop->first) active @endif " data-toggle="tab"
+                    <a class="nav-link @if($loop->first) active @endif pieza_clave_link" data-toggle="tab"
                        href="#{{ $variante }}-{{ $modelo }}"
+                       @php $pie=App\Models\PiezaClaveDato::where('valor',$modelo)->first(); @endphp
+                       data-id="@if($pie){{$pie->pieza_clave_id}} @endif"
                        role="tab">
                         <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                         <span class="d-none d-sm-block">{{ !empty(trim($modelo)) ? $modelo : '---' }}</span>
@@ -25,7 +27,6 @@
                                     @foreach($info as $tab => $data)
                                         @include('admin.fichas.variantes.variantes.tab', ['first' => $loop->first, 'variante' => $variante, 'modelo' => $modelo, 'tab' => $tab])
                                     @endforeach
-                                    @include('admin.fichas.variantes.variantes.tab', ['first' => false, 'variante' => $variante, 'modelo' => $modelo, 'tab' => 'Fotografias'])
                                 </div>
                             </div>
                             <div class="col-xl-10 col-sm-9">
@@ -47,14 +48,6 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            <div class="tab-pane fade"
-                                                 id="datos-variante-{{ $variante }}-{{ $modelo }}-fotografias"
-                                                 role="tabpanel"
-                                                 aria-labelledby="datos-variante-tab-{{ $variante }}-{{ $modelo }}-fotografias">
-                                                <div class="shadow-none mb-0">
-                                                    @include('admin.fichas.variantes.pieza_clave.fotografias_variante',['modelo' => $modeloModel, 'variante' => $variante, 'varianteCodigo' => $modelo ])
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
