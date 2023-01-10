@@ -7,6 +7,13 @@
             </button>
         </xxx>
         <xxx>
+            @if(Auth::user())
+                <div class="d-flex d-lg-none">
+                    <h4 class="welcome-title">Bienvenido, {{ Auth::user()->name }}</h4>
+                </div>
+            @endif
+        </xxx>
+        <xxx>
             <button type="button"
                     id="toggle-contrast"
                     class="btn btn-dark rounded px-3"
