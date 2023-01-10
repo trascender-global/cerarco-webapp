@@ -53,32 +53,7 @@
 
 <script>
 
-     $("#btn_save_variante_{{$varianteCodigo}}_{{$variante}}").on("click",function(){
-        if ($("#variante_foto_input_{{$varianteCodigo}}_{{$variante}}")[0].files[0]) {
-            $(this).attr('disabled', true); 
-    var file=$("#variante_foto_input_{{$varianteCodigo}}_{{$variante}}")[0].files[0];
-    var pos =$("#variante_input_posicion_{{$varianteCodigo}}_{{$variante}}").val();
-    var datos = new FormData();
-    datos.append('file', file);
-    datos.append('posicion', pos);
-    $.ajax({
-        url: "{{ route('admin.ficha.subir_fotos_variante', compact('modelo','variante','varianteCodigo')) }}",
-        type: "post",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false
-    }).done(function(res){
-        $("#variante_content_fotos_img_{{$varianteCodigo}}_{{$variante}}").html(res);
-        $("#btn_save_variante_{{$varianteCodigo}}_{{$variante}}").removeAttr("disabled");
-        $("#variante_foto_input_{{$varianteCodigo}}_{{$variante}}").val("");
-        $("#variante_input_posicion_{{$varianteCodigo}}_{{$variante}}").val("");
-    });
-}else{
-    alert("Seleccione un archivo a subir");
-}
     
-});
    $(document).on('change','.position_input_variante_{{$variante}}',function() {
     var datos = new FormData();
     datos.append('id', $(this).data("foto"));

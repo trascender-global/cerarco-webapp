@@ -1,1 +1,1 @@
-<input class="form-control" type="text" value="{{ $dato ->valor ?? '' }}" id="{{ $campo->slug }}" name="{{ $campo->slug }}" data-pieza_clave="{{ $pieza_clave->id ?? null }}">
+<input class="form-control" type="text" value="{{ $dato ->valor ?? '' }}" id="{{ $campo->slug }}_{{ $pieza_clave->id ?? null }}" name="{{ $campo->slug }}" data-pieza_clave="{{ $pieza_clave->id ?? null }}">

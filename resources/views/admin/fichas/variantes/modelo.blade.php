@@ -8,7 +8,7 @@
                         @foreach($modeloMetaData as $tab => $data)
                             @include('admin.fichas.variantes.variantes.tab', ['first' => $loop->first, 'variante' => $variante, 'modelo' => 'modelo', 'tab' => $tab])
                         @endforeach
-                        @include('admin.fichas.variantes.variantes.tab', ['first' => false, 'variante' => $variante, 'modelo' => 'modelo', 'tab' => 'Fotografias'])
+                        {{-- @include('admin.fichas.variantes.variantes.tab', ['first' => false, 'variante' => $variante, 'modelo' => 'modelo', 'tab' => 'Fotografias']) --}}
                     </div>
                 </div>
                 <div class="col-xl-10 col-sm-9">
@@ -29,12 +29,12 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                <div class="tab-pane fade" id="datos-variante-{{ $variante }}-modelo-fotografias" role="tabpanel"
+                                {{-- <div class="tab-pane fade" id="datos-variante-{{ $variante }}-modelo-fotografias" role="tabpanel"
                                      aria-labelledby="datos-variante-tab-{{ $variante }}-modelo-fotografias">
                                     <div class="shadow-none mb-0">
                                         @include('admin.fichas.variantes.pieza_clave.fotografias_modelo',['modelo' => $modelo, 'variante' => 'modelo'])
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

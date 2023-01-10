@@ -21,6 +21,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="d-flex mb-3" style="align-items: center;">
+                        <h5 class="">Ficha: </h5>
+                        <input class="form-control ml-2" style="width: 200px" type="text" id="codigo_modelo_main"
+                            placeholder="Codigo modelo" value="" />
+                    </div>
+
                     <div id="basic-pills-wizard" class="twitter-bs-wizard">
                         <ul class="twitter-bs-wizard-nav">
                             <li class="nav-item">
@@ -28,47 +34,15 @@
                                     <span class="step-number mr-2">1</span>
                                     Pieza Clave</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#modelo" class="nav-link" data-toggle="tab">
-                                    <span class="step-number mr-2">2</span>
-                                    Modelo</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="#variante-de-forma" class="nav-link" data-toggle="tab">
-                                    <span class="step-number mr-2">3</span>
-                                    Variantes de Forma</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#variante-decorativa" class="nav-link" data-toggle="tab">
-                                    <span class="step-number mr-2">4</span>
-                                    Variantes Decorativas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#variante-arqueometrica" class="nav-link" data-toggle="tab">
-                                    <span class="step-number mr-2">5</span>
-                                    Variantes Arqueométricas</a>
-                            </li>
+                           
 
                         </ul>
                         <div class="tab-content twitter-bs-wizard-tab-content">
                             <div class="tab-pane" id="pieza-clave">
                                 @include('admin.fichas.create.pieza_clave_foreach')
                             </div>
-
-                            <div class="tab-pane" id="modelo">
-                            </div>
-
-                            <div class="tab-pane" id="variante-de-forma">
-                            </div>
-
-                            <div class="tab-pane" id="variante-decorativa">
-                            </div>
-
-                            <div class="tab-pane" id="variante-arqueometrica">
-                            </div>
                             <div class="col-xl-12">
-                                <a class="btn btn-info btn-block">Salvar</a>
+                                <button id="btnSaveAll" class="btn btn-info btn-block">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -76,6 +50,8 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-success" id="btnAddPiezaClave"
+        style="z-index: 1000;position: fixed;right: 10px;bottom: 10px">AGREAGAR PIEZA CLAVE</button>
     <!-- end row -->
 @endsection
 @section('script')
@@ -86,6 +62,126 @@
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
 
     <script>
+            $('input[name*=dg-codigo-modelo]').attr('readonly', true)
+            $('input[name*=dg-variantes-forma-asociada]').attr('readonly', true)
+            $('input[name*=dg-variante-decorativa-asociada]').attr('readonly', true)
+            $('input[name*=dg-variante-arqueometrica-asociada]').attr('readonly', true)
+            
+        $('#btnAddPiezaClave').on('click', function() {
+           var btn= $(this)
+           btn.prop('disabled',true)
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.ficha.render',["type"=>"create"]) }}',
+                data: {
+                    index: $('#content_tab_header li').length + 1
+                },
+                success: function(data, status, xhr) { // success callback function
+                    $('#content_tab_header').append(data.header)
+                    $('#content_tab_body').append(data.body)
+                    loadNamePiezas()
+                    btn.prop('disabled',false)
+                },
+                error: function(jqXhr, textStatus, errorMessage) { // error callback 
+                    $('p').append('Error: ' + errorMessage);
+                    btn.prop('disabled',false)
+                }
+            });
+        })
+        $(document).on('click', '.btn-delete-pieza', function() {
+            $("#content_tab_header").find("li:last").remove();
+            $("#content_tab_body").find("form:last").remove();
+            loadNamePiezas()
+        })
+        $(document).on('change', '.form-check-input.variante', function() {
+            var id = $(this).data('id')
+            var type = $(this).data('type')
+            var check=$(this).is(':checked')
+            switch (type) {
+                case 'forma':
+                    check ? $(`#dg-variantes-forma-asociada_${id}`).val(
+                        `${$('#codigo_modelo_main').val()}-${String.fromCharCode((id-1) + 'A'.charCodeAt(0))}`) 
+                        :
+                        $(`#dg-variantes-forma-asociada_${id}`).val(``)
+                    break;
+                case 'decorativo':
+                    check ? $(`#dg-variante-decorativa-asociada_${id}`).val(
+                        `${$('#codigo_modelo_main').val()}-${id}`)
+                        :$(`#dg-variante-decorativa-asociada_${id}`).val('')
+                    break;
+                default:
+                    check ? $(`#dg-variante-arqueometrica-asociada_${id}`).val(
+                        `${$('#codigo_modelo_main').val()}-${romanize(id)}`)
+                        :
+                        $(`#dg-variante-arqueometrica-asociada_${id}`).val('')
+                    break;
+            }
+        })
+        $(document).on('keyup', '#codigo_modelo_main', function() {
+            loadNamePiezas()
+        })
+
+        function loadNamePiezas() {
+            var text = $('#codigo_modelo_main').val()
+            $('input[name*=dg-codigo-modelo]').attr('readonly', true)
+            $('input[name*=dg-variantes-forma-asociada]').attr('readonly', true)
+            $('input[name*=dg-variante-decorativa-asociada]').attr('readonly', true)
+            $('input[name*=dg-variante-arqueometrica-asociada]').attr('readonly', true)
+            $('input[name*=dg-codigo-modelo]').each(function(i) {
+                $(this).val(text)
+                $(this).change()
+                $('#pieza_clave_codigo_'+(i+1)).val(`${text}-PC${(i+1)}`)
+            })
+            var len = $('#content_tab_header li').length
+            for (let index = 1; index <= len; index++) {
+                $(`#title_pieza_clave_delete_${index}`).css('display', 'none')
+            }
+            if (len > 1)
+                $(`#title_pieza_clave_delete_${len}`).css('display', 'block')
+
+        }
+        $(document).on('change', 'input[name*=dg-codigo-modelo]', function() {
+            $('#title_pieza_clave_' + $(this).data("pieza_clave")).text(
+                `${$(this).val()}-PC${$(this).data("pieza_clave")}`)
+                $('.form-check-input.variante').change()
+        })
+
+        function romanize(num) {
+            if (isNaN(num))
+                return NaN;
+            var digits = String(+num).split(""),
+                key = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+                    "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
+                    "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"
+                ],
+                roman = "",
+                i = 3;
+            while (i--)
+                roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+            return Array(+digits.join("") + 1).join("M") + roman;
+        }
+        $('#btnSaveAll').on('click',function(){
+            var len = $('#content_tab_header li').length
+            //for (let index = 1; index <= len; index++) {
+                saveForm(len)
+            //}
+        })
+        function saveForm(len){
+           var form= $(`#content_tab_body`).serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('admin.ficha.save_pieza_clave')}}/"+len,
+                data:form,
+                success: function(data, status, xhr) { // success callback function
+                 location.href=`${$('#codigo_modelo_main').val()}/editar_ficha`
+                   console.log(data)
+                },
+                error: function(jqXhr, textStatus, errorMessage) { // error callback 
+                    
+                }
+            });
+        }
+
         // $(document).on('submit', '.pieza_clave_form',function (evt) {
         //     evt.preventDefault();
 

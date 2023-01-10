@@ -529,7 +529,7 @@ class PiezaClaveCamposSeeder extends Seeder
             'slug' => Str::kebab('pet composicion inorganica'),
             'lista' => config('constants.lista_valores.petrografia.composicion_inorganica'),
             'pieza_clave_categorias_id' => config('constants.pieza_clave_categorias.petrografia')
-        ]);
+        ]); 
         PiezaClaveCampos::create([
             'campo' => 'Composición orgánica (antiplástico)',
             'slug' => Str::kebab('pet composicion organica'),

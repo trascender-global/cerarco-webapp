@@ -6,13 +6,17 @@
             <label for="example-text-input" class="col-form-label font-weight-bolder">Numero de Puntos</label>
         </div>
         <div class="col-md-8">
-            <input class="form-control" type="number" value="{{ $pieza_clave->puntos->count() === 0 ? 1 : $pieza_clave->puntos->count() }}" id="puntos_mapa_{{ $pieza_clave->pieza_clave }}" name="des-for-diametro-hueco-promedio">
+            <input class="form-control" type="number"
+                value="{{ $pieza_clave->puntos->count() === 0 ? 1 : $pieza_clave->puntos->count() }}"
+                id="puntos_mapa_{{ $pieza_clave->pieza_clave }}" name="des-for-diametro-hueco-promedio">
         </div>
     </div>
 </div>
 
 <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoibHVtaWNhbWUzMyIsImEiOiJja3p3eDdqdmw0a21tMnZwYWJjcHZydnVkIn0.ju_prCiuR_L-7wWftgW4QQ';
+    console.log('mapa')
+    mapboxgl.accessToken =
+        'pk.eyJ1IjoibHVtaWNhbWUzMyIsImEiOiJja3p3eDdqdmw0a21tMnZwYWJjcHZydnVkIn0.ju_prCiuR_L-7wWftgW4QQ';
     var map_{{ $pieza_clave->id }} = new mapboxgl.Map({
         container: 'mapa_{{ $pieza_clave->pieza_clave }}',
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -21,21 +25,22 @@
     });
 
     var currentMarkers_{{ $pieza_clave->id }} = [];
-    @foreach($pieza_clave->puntos as $punto)
+    @foreach ($pieza_clave->puntos as $punto)
 
-    var marker = new mapboxgl.Marker({
-        draggable: true
-    }).setLngLat([ {{ $punto->lng }}, {{ $punto->lat }} ])
-        .addTo(map_{{ $pieza_clave->id }});
-    currentMarkers_{{ $pieza_clave->id }}.push(marker);
-    marker.on('dragend', createDragEvent);
+        var marker = new mapboxgl.Marker({
+                draggable: true
+            }).setLngLat([{{ $punto->lng }}, {{ $punto->lat }}])
+            .addTo(map_{{ $pieza_clave->id }});
 
+        currentMarkers_{{ $pieza_clave->id }}.push(marker);
+        marker.on('dragend', createDragEvent);
     @endforeach
 
     map_{{ $pieza_clave->id }}.on('click', (event) => {
 
         if (currentMarkers_{{ $pieza_clave->id }} !== null) {
-            for (var i = currentMarkers_{{ $pieza_clave->id }}.length - $('#puntos_mapa_{{ $pieza_clave->pieza_clave }}').val(); i >= 0; i--) {
+            for (var i = currentMarkers_{{ $pieza_clave->id }}.length - $(
+                    '#puntos_mapa_{{ $pieza_clave->pieza_clave }}').val(); i >= 0; i--) {
                 currentMarkers_{{ $pieza_clave->id }}.pop().remove();
             }
         }
@@ -43,8 +48,8 @@
         let lng = event.lngLat.lng;
         let lat = event.lngLat.lat;
         let marker = new mapboxgl.Marker({
-            draggable: true
-        })
+                draggable: true
+            })
             .setLngLat([lng, lat])
             .addTo(map_{{ $pieza_clave->id }});
         currentMarkers_{{ $pieza_clave->id }}.push(marker);
@@ -57,7 +62,7 @@
 
     })
 
-    function dragMarker_{{ $pieza_clave->id }}(marker){
+    function dragMarker_{{ $pieza_clave->id }}(marker) {
         for (let i = 0; i < currentMarkers_{{ $pieza_clave->id }}.length; i++) {
             if (currentMarkers_{{ $pieza_clave->id }}[i].getElement() === marker.getElement()) {
                 currentMarkers_{{ $pieza_clave->id }}[i] = marker;
@@ -68,9 +73,12 @@
     }
 
     function getPuntos(markers) {
-        return markers.map(function (element) {
+        return markers.map(function(element) {
             var punto = element.getLngLat();
-            return {'lat': punto.lat, 'lng': punto.lng};
+            return {
+                'lat': punto.lat,
+                'lng': punto.lng
+            };
         });
     }
 

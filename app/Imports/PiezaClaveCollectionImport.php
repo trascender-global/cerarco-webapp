@@ -32,6 +32,7 @@ class PiezaClaveCollectionImport implements ToCollection
             $piezaClave = $modelo->piezasClave->isEmpty() ? null : $modelo->piezasClave->first();
             foreach ($dataConfig as $config) {
                 $data = $ficha->get($config['fila'] - 1);
+                //dd($ficha->get(4));
                 if (is_null($data)) {
                     continue;
                 }
@@ -50,19 +51,19 @@ class PiezaClaveCollectionImport implements ToCollection
 
                     $dataModelo[$modelo_bloque][$config['nombre']] = $piezaClaveDato;
                 }
-                if ($config['forma'] === true) {
+                if ($config['forma'] === true && $ficha[config('fichas.variantes.forma')][1]!='') {
                     $variante     = $ficha[config('fichas.variantes.forma')][1];
                     $forma_bloque = $piezaClaveDato->getAttribute('config')['forma_bloque'];
 
                     $dataForma[$variante][$forma_bloque][$config['nombre']] = $piezaClaveDato;
                 }
-                if ($config['decorativa'] === true) {
+                if ($config['decorativa'] === true && $ficha[config('fichas.variantes.decorativa')][1]!='') {
                     $variante          = $ficha[config('fichas.variantes.decorativa')][1];
                     $decorativa_bloque = $piezaClaveDato->getAttribute('config')['decorativa_bloque'];
 
                     $dataDecorativa[$variante][$decorativa_bloque][$config['nombre']] = $piezaClaveDato;
                 }
-                if ($config['arqueometrica'] === true) {
+                if ($config['arqueometrica'] === true && $ficha[config('fichas.variantes.arqueometrica')][1]!='') {
                     $variante             = $ficha[config('fichas.variantes.arqueometrica')][1];
                     $arqueometrica_bloque = $piezaClaveDato->getAttribute('config')['arqueometrica_bloque'];
 

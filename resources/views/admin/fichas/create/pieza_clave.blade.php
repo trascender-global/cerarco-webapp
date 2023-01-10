@@ -38,24 +38,39 @@
                         aria-controls="difraccion-rayos-x-general-{{ $index }}" aria-selected="false">
                     <p class="font-weight-bold mt-1 mb-1">Difracción de rayos X</p>
                 </a>
-                <a class="nav-link" id="fotografias-general-tab-{{ $index }}" data-toggle="pill" href="#fotografias-general-{{ $index }}" role="tab"
-                        aria-controls="fotografias-general-{{ $index }}" aria-selected="false">
-                    <p class="font-weight-bold mt-1 mb-1">Fotografías</p>
+                <a class="nav-link" id="microscopio-electronico-de-barrido-tab-{{ $index }}" data-toggle="pill" href="#microscopio-electronico-de-barrido-{{ $index }}" role="tab"
+                        aria-controls="microscopio-electronico-de-barrido-{{ $index }}" aria-selected="false">
+                    <p class="font-weight-bold mt-1 mb-1">Microscopio electronico</p>
                 </a>
-                <a class="nav-link" id="dibujos-general-tab-{{ $index }}" data-toggle="pill" href="#dibujos-general-{{ $index }}" role="tab"
-                        aria-controls="dibujos-general-{{ $index }}" aria-selected="false">
-                    <p class="font-weight-bold mt-1 mb-1">Dibujos</p>
-                </a>
-                <a class="nav-link" id="mapa-general-tab-{{ $index }}" data-toggle="pill" href="#mapa-general-{{ $index }}" role="tab"
-                        aria-controls="mapa-general-{{ $index }}" aria-selected="false">
-                    <p class="font-weight-bold mt-1 mb-1">Mapa</p>
-                </a>
+               
+                
             </div>
         </div>
         <div class="col-xl-10 col-sm-9">
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content" id="info-pieza-content">
+                        <div class="row">
+                        <div class="col-12 d-flex mb-5">
+                            <div class="form-check mr-5">
+                                <input class="form-check-input variante" type="checkbox" data-id="{{$index}}" data-type="forma" value="" id="CheckForma_{{$index}}">
+                                <label class="form-check-label" for="CheckForma_{{$index}}">
+                                  Variante forma
+                                </label>
+                              </div>
+                              <div class="form-check mr-5">
+                                <input class="form-check-input variante" type="checkbox" data-id="{{$index}}" data-type="decorativo" value="" id="Checkdecoracion_{{$index}}">
+                                <label class="form-check-label" for="Checkdecoracion_{{$index}}">
+                                  Variante decorativo
+                                </label>
+                              </div><div class="form-check mr-5">
+                                <input class="form-check-input variante" type="checkbox" data-id="{{$index}}" data-type="arqueometrica" value="" id="Checkdarqueometricas_{{$index}}">
+                                <label class="form-check-label" for="Checkdarqueometricas_{{$index}}">
+                                  Variante arqueometrica
+                                </label>
+                              </div>
+                        </div>
+                    </div>
                         <div class="tab-pane fade show active" id="datos-generales-general-{{ $index }}" role="tabpanel"
                                 aria-labelledby="datos-generales-general-tab-{{ $index }}">
                             <div class="shadow-none mb-0">
@@ -70,7 +85,7 @@
                                 aria-labelledby="pieza-clave-general-tab-{{ $index }}">
                             <div class="shadow-none mb-0">
                                 @foreach(\App\Models\PiezaClaveCategorias::find(config('constants.pieza_clave_categorias.cronologia'))->campos as $campo)
-                                    @include('admin.fichas.variantes.pieza_clave.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
+                                    @include('admin.fichas.create.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
                                 @endforeach
                             </div>
                         </div>
@@ -78,7 +93,7 @@
                                 aria-labelledby="fragmento-general-tab-{{ $index }}">
                             <div class="shadow-none mb-0">
                                 @foreach(\App\Models\PiezaClaveCategorias::find(config('constants.pieza_clave_categorias.fragmento'))->campos as $campo)
-                                    @include('admin.fichas.variantes.pieza_clave.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
+                                    @include('admin.fichas.create.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
                                 @endforeach
                             </div>
                         </div>
@@ -86,7 +101,7 @@
                                 aria-labelledby="contexto-general-tab-{{ $index }}">
                             <div class="shadow-none mb-0">
                                 @foreach(\App\Models\PiezaClaveCategorias::find(config('constants.pieza_clave_categorias.contexto'))->campos as $campo)
-                                    @include('admin.fichas.variantes.pieza_clave.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
+                                    @include('admin.fichas.create.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
                                 @endforeach
                             </div>
                         </div>
@@ -136,22 +151,12 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="fotografias-general-{{ $index }}" role="tabpanel"
-                                aria-labelledby="fotografias-general-tab-{{ $index }}">
+                        <div class="tab-pane fade" id="microscopio-electronico-de-barrido-{{ $index }}" role="tabpanel"
+                                aria-labelledby="microscopio-electronico-de-barrido">
                             <div class="shadow-none mb-0">
-                                fotografias
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="dibujos-general-{{ $index }}" role="tabpanel"
-                                aria-labelledby="dibujos-general-tab-{{ $index }}">
-                            <div class="shadow-none mb-0">
-                               dibujos
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="mapa-general-{{ $index }}" role="tabpanel"
-                                aria-labelledby="mapa-general-tab-{{ $index }}">
-                            <div class="shadow-none mb-0">
-                                mapa
+                                @foreach(\App\Models\PiezaClaveCategorias::find(config('constants.pieza_clave_categorias.microscopio_electronico_de_barrido'))->campos as $campo)
+                                    @include('admin.fichas.create.campos' , ['campo'=>$campo, 'dato' => '' , 'pieza_clave' => $index ])
+                                @endforeach
                             </div>
                         </div>
                     </div>

@@ -108,12 +108,16 @@ return [
             'textura'             => 33,
             'granulometria'       => 34,
             'ambiente_coccion'    => 35,
-            'tecnica_manufactura' => 36,
+            'tecnica_manufactura' => 36, 
         ],
         'descripcion_fragmento'       => [
             'confiabilidad_reconstruccion' => 37,
         ],
         'petrografia'                 => [
+            'porosidad_pasta'        => 57,
+            'porosidad_forma'        => 58,
+            'porosidad_tamaño'       => 59,
+            'tamaño_granos'          => 60,
             'composicion_inorganica' => 38,
             'composicion_organica'   => 39,
             'forma_granos'           => 40,
@@ -158,5 +162,6 @@ return [
         'fotografias'         => 10,
         'dibujos'             => 11,
         'otros'               => 12,
+        'microscopio_electronico_de_barrido' => 13,
     ],
 ];
