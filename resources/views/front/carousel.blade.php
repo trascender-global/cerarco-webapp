@@ -2,9 +2,13 @@
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-        <div class="carousel-item active pt-5" style="background-image: url( '{{ asset('assets/images/hero/home-left-sidebar-1.png') }}' )">
+        <div class="carousel-item active pt-5" style="background-image: url( '{{ asset('images/fondo1.png') }}' );min-height:500px;">
+            
+        </div>
+        <div class="carousel-item pt-5" style="background-image: url( '{{ asset('assets/images/hero/home-left-sidebar-1.png') }}' );min-height:500px">
             <h1 class="d-block text-center text-light mt-5">CATÁLOGO DE CERÁMICA ARQUEOLÓGICA DE COLOMBIA</h1>
             <h3 class="d-block text-center mt-5 text-light w-75 mx-auto">El primer espacio virtual que reúne los conocimientos sobre cerámica prehispánica de Colombia</h3>
             <div class="d-block button-box text-center mt-5 d-flex justify-content-center">
@@ -18,7 +22,7 @@
                 </a>
             </div>
         </div>
-        <div class="carousel-item pt-5" style="background-image: url( '{{ asset('assets/images/hero/home-left-sidebar-2.png') }}' )">
+        <div class="carousel-item pt-5" style="background-image: url( '{{ asset('assets/images/hero/home-left-sidebar-2.png') }}' );min-height:500px">
             <h1 class="d-block text-center text-light mt-5">CATÁLOGO DE CERÁMICA ARQUEOLÓGICA DE COLOMBIA</h1>
             <h3 class="d-block text-center mt-5 text-light w-75 mx-auto">Un espacio interactivo para el estudio y divulgación de la cerámica prehispánica de Colombia</h3>
             <div class="d-block button-box text-center mt-5 d-flex justify-content-center">
