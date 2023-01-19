@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TopicMessage extends Model
+class Like extends Model
 {
     use HasFactory;
     public function forum()
@@ -16,12 +16,8 @@ class TopicMessage extends Model
     {
         return $this->belongsTo(ForumTopic::class);
     }
-    public function likes()
+    public function topic_message()
     {
-        return $this->hasMany(Like::class);
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(TopicMessage::class);
     }
 }

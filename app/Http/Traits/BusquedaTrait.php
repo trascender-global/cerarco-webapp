@@ -168,7 +168,7 @@ trait BusquedaTrait
         $collect = collect([]);
         if (!empty(trim(request()->get($key)))) {
             $variante = 'metadata_'.$variante;
-            foreach (DB::table('modelos')->get() as $data) {
+            foreach (DB::table('modelos')->where('status',NULL)->get() as $data) {
                 if (Arr::has(json_decode($data->$variante, true), trim(request()->get($key)))) {
                     $data = json_decode($data->$variante, true);
                     $collect->push($data[trim(request()->get($key))]['Descripción']['Descripción formal (resumen)']['pieza_clave_id'] ?? 0);
@@ -245,7 +245,10 @@ trait BusquedaTrait
     {
         $modelos = [];
         foreach (PiezaClave::whereIn('id', $resultados)->get() as $pieza) {
-            $modelos[$pieza->modelo->id] = $pieza->modelo;
+            if($pieza->modelo->status===NULL){
+                $modelos[$pieza->modelo->id] = $pieza->modelo;
+            }
+            
         }
         return collect($modelos);
     }
@@ -258,7 +261,9 @@ trait BusquedaTrait
     {
         $modelos = [];
         foreach (PiezaClave::whereIn('id', $resultados)->get() as $pieza) {
+            if($pieza->modelo->status===NULL){
             $modelos[$pieza->modelo->id] = $pieza->modelo->id;
+        }
         }
         return $modelos;
     }

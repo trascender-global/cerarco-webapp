@@ -34,7 +34,7 @@ class Modelo extends Model
     }
     public function forum()
     {
-        return $this->belongsTo(Forum::class);
+        return $this->hasOne(Forum::class);
     }
     public function getModelo()
     {

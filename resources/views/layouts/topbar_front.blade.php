@@ -2,14 +2,16 @@
     <div class="container-fluid container-fluid--cp-60">
         <div class="row align-items-center">
             <div class="col-6 col-md-4">
-                @if(Auth::user())
+                @if (Auth::user())
                     <div class="d-none d-lg-flex">
                         <h4 class="welcome-title">Bienvenido, {{ Auth::user()->name }}</h4>
                     </div>
                 @endif
                 <div class="logo d-block d-lg-none d-flex justify-content-between align-items-center mb-2">
-                    <a href="index.html"><img src="{{ asset('assets/images/logos/logo.png') }}" alt="" class="img-fluid p-1"></a>
-                    <button type="button" id="mobileSidebarCollapse" class="d-inline d-lg-none btn btn-dark rounded px-3">
+                    <a href="index.html"><img src="{{ asset('assets/images/logos/logo.png') }}" alt=""
+                            class="img-fluid p-1"></a>
+                    <button type="button" id="mobileSidebarCollapse"
+                        class="d-inline d-lg-none btn btn-dark rounded px-3">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -27,18 +29,27 @@
                                 <i class="icon-home"></i>
                             </a>
                         </div>
-                        @if(!Auth::user())
+                        @if (!Auth::user())
                             <div class="header-right-items d-none d-md-block">
                                 <a data-toggle="modal" data-target="#loginModal">
                                     <i class="icon-user"></i>
                                 </a>
                             </div>
                         @else
+                            @if (Auth::user()->role_id != 3)
+                                <div class="header-right-items">
+                                    <a href="{{route('admin.index')}}">
+                                        <i class="fas fa-columns"></i>
+                                    </a>
+                                </div>
+                            @endif
                             <div class="header-right-items d-none d-md-block">
-                                <button type="button" class="logout-btn btn rounded d-none d-md-flex mr-1" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <button type="button" class="logout-btn btn rounded d-none d-md-flex mr-1"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <img src="{{ asset('assets/svg/logout-icon.svg') }}" alt="Logout icon">
                                 </button>
-                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                 </form>
                             </div>
@@ -50,7 +61,7 @@
                                     <i class="icon-magnifier"></i>
                                 </a>
                             </div>
-                            @if(!Auth::user())
+                            @if (!Auth::user())
                                 <div class="header-right-items">
                                     <a data-toggle="modal" data-target="#loginModal">
                                         <i class="icon-user"></i>
@@ -58,10 +69,12 @@
                                 </div>
                             @else
                                 <div class="header-right-items">
-                                    <button type="button" class="logout-btn btn rounded d-flex d-md-none" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <button type="button" class="logout-btn btn rounded d-flex d-md-none"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form2').submit();">
                                         <img src="{{ asset('assets/svg/logout-icon.svg') }}" alt="Logout icon">
                                     </button>
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form2" action="{{ route('admin.logout') }}" method="POST"
+                                        style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -98,12 +111,17 @@
                             <form class="form-horizontal" method="POST" action="{{ route('admin.login') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <input name="email" type="text" class="form-control @error('email') is-invalid @enderror autofill-input" @if (old('email')) value="{{ old('email') }}" @endif id="login-email" placeholder="" autocomplete="email" required>
+                                    <input name="email" type="text"
+                                        class="form-control @error('email') is-invalid @enderror autofill-input"
+                                        @if (old('email')) value="{{ old('email') }}" @endif
+                                        id="login-email" placeholder="" autocomplete="email" required>
                                     <label for="email" id="email-label">Correo electrónico</label>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror autofill-input" id="login-password" placeholder="" required>
+                                    <input type="password" name="password"
+                                        class="form-control @error('password') is-invalid @enderror autofill-input"
+                                        id="login-password" placeholder="" required>
                                     <label for="password" id="password-label">Ingresa tu contraseña</label>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -113,12 +131,14 @@
                                 </div>
 
                                 <div class="mt-4 mb-4 text-center">
-                                    <a href="{{ route('admin.password.request') }}" class="text-muted"><i class="mdi mdi-lock mr-1"></i>
+                                    <a href="{{ route('admin.password.request') }}" class="text-muted"><i
+                                            class="mdi mdi-lock mr-1"></i>
                                         ¿Ha olvidado su contraseña?</a>
                                 </div>
 
                                 <div id="modal-login-footer">
-                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" data-toggle="modal" data-target="#createModal">Crear cuenta</button>
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                                        data-toggle="modal" data-target="#createModal">Crear cuenta</button>
                                     <button type="submit" class="btn btn-primary">Ingresar</button>
                                 </div>
                             </form>
@@ -132,7 +152,8 @@
 <!-- End login modal -->
 
 <!-- Create account modal -->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -150,10 +171,14 @@
                             </h3>
                         </div>
                         <div class="p-2">
-                            <form method="POST" action="{{ route('admin.register.create') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.register.create') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror autofill-input" value="{{ old('email') }}" id="create-email" name="email" placeholder="" required>
+                                    <input type="text"
+                                        class="form-control @error('email') is-invalid @enderror autofill-input"
+                                        value="{{ old('email') }}" id="create-email" name="email" placeholder=""
+                                        required>
                                     <label for="email" id="email-label">Correo electrónico</label>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -163,7 +188,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror autofill-input" value="{{ old('name') }}" required name="name" id="name" placeholder="">
+                                    <input type="text"
+                                        class="form-control @error('name') is-invalid @enderror autofill-input"
+                                        value="{{ old('name') }}" required name="name" id="name"
+                                        placeholder="">
                                     <label for="name" id="name-label">Nombre</label>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -173,7 +201,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror autofill-input" name="password" required id="create-password" placeholder="">
+                                    <input type="password"
+                                        class="form-control @error('password') is-invalid @enderror autofill-input"
+                                        name="password" required id="create-password" placeholder="">
                                     <label for="password" id="password-label">Contraseña</label>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -183,12 +213,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input id="password-confirm" type="password" name="password_confirmation" class="form-control @error('password') is-invalid @enderror autofill-input" name="password" required placeholder="">
-                                    <label for="password-confirm" id="password-confirm-label">Confirmación de contraseña</label>
+                                    <input id="password-confirm" type="password" name="password_confirmation"
+                                        class="form-control @error('password') is-invalid @enderror autofill-input"
+                                        name="password" required placeholder="">
+                                    <label for="password-confirm" id="password-confirm-label">Confirmación de
+                                        contraseña</label>
                                 </div>
 
                                 <div id="modal-create-footer">
-                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Prefiero iniciar sesión</button>
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                                        data-toggle="modal" data-target="#loginModal">Prefiero iniciar sesión</button>
                                     <button type="submit" class="btn btn-primary">Registrar</button>
                                 </div>
                             </form>
@@ -249,6 +283,7 @@
         .modal-image {
             width: 0%;
         }
+
         .modal-form {
             width: 100%;
         }

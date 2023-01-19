@@ -12,9 +12,9 @@ class Forum extends Model
     /**
      * @return HasMany
      */
-    public function modelos()
+    public function modelo()
     {
-        return $this->hasMany(Modelo::class);
+        return $this->belongsTo(Modelo::class);
     }
 
     public function forum_topics()
@@ -24,5 +24,9 @@ class Forum extends Model
     public function topic_messages()
     {
         return $this->hasMany(TopicMessage::class);
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }

@@ -3,6 +3,7 @@
 <link href="{{ asset('assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('assets/libs/jquery/jquery.min.js')}}"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"

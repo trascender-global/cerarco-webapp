@@ -21,4 +21,8 @@ class ForumTopic extends Model
     {
         return $this->hasMany(TopicMessage::class);
     }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

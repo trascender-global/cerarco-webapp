@@ -146,10 +146,11 @@
                                     <li>Victoria Báez, Ana María Paez, Daniel Laverde (Universidad Externado de Colombia, 2017):</li>                                    
                                     <li>Edgar Bernal (Universidad de Caldas): Pasantía (2020-2021)</li>
                                     <li>Alejandro Villa, Darío González (Universidad del Magdalena): Pasantes (2017)</li>
+                                    <li>Diana Mendoza: Fichas de modelos y glosario  (2019)</li>
                                 <br />
 
                                 <p><strong>Un agradecimiento especial a:</strong> </p>
-                                    <li>Francisco Romano, Clemencia Plazas, Pedro Argüello, Ángela Cadena, Ana María Groot, Sneider Rojas, Ana María Falchetti, Marcela Jaramillo, Jaime Pardo, Leonor Herrera, Juanita Sáenz, Patricia Ramirez, Victor González, Doris Rojas, Carlos López, Santiago Giraldo, Wilhelm Londoño y a todas las otras arqueólogas y arqueólogos que con su trabajo han contribuido directamente o indirectamente a este proyecto. Además tenemos que agradecer a todas las poblaciones indígenas del territorio que ahora llamamos Colombia, antiguas y presentes, que han realizado los increíbles objetos que presentamos en este catálogo.
+                                    <li>Francisco Romano, Clemencia Plazas, Pedro Argüello, Ángela Cadena, Ana María Groot, Sneider Rojas, Ana María Falchetti, Marcela Jaramillo, Jaime Pardo, Leonor Herrera, Juanita Sáenz, Patricia Ramirez, Victor González, Doris Rojas, Carlos López, Santiago Giraldo, Wilhelm Londoño, Angela Escobar, Deyanira Mendez y a todas las otras arqueólogas y arqueólogos que con su trabajo han contribuido directamente o indirectamente a este proyecto. Además tenemos que agradecer a todas las poblaciones indígenas del territorio que ahora llamamos Colombia, antiguas y presentes, que han realizado los increíbles objetos que presentamos en este catálogo.
 
 </li>
                                     

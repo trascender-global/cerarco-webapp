@@ -29,8 +29,18 @@ Route::prefix('buscador')->name('buscador.')->group(function () {
 });
 
 Route::prefix('ficha')->name('ficha.')->group(function () {
-    Route::get('{modelo:codigo}/informacion_ficha', 'FichaController@informacionFicha')->name('informacion_ficha');
 
+    Route::get('{modelo:codigo}/informacion_ficha', 'FichaController@informacionFicha')->name('informacion_ficha');
+    Route::post('render_header', 'FichaController@renderHeaderFicha')->name('render_ficha');
+    Route::post('send_comment', 'FichaController@sendComment')->name('send_comment');
+    Route::post('like_topic', 'FichaController@likeTopic')->name('like_topic');
+    Route::post('message_topic', 'FichaController@messageTopic')->name('message_topic');
+    Route::post('like_message', 'FichaController@likeMessage')->name('like_message');
+    
+    Route::post('render_ficha_comment', 'FichaController@renderFichaComment')->name('render_ficha_comment');
+    Route::post('render_foro_comment', 'FichaController@renderForoComment')->name('render_foro_comment');
+
+    
     Route::get('{modelo:codigo}/variante_forma', 'FichaController@varianteForma')->name('variante_forma');
     Route::get('{modelo:codigo}/{codigo}/detalle_forma', 'FichaController@detalleVarianteForma')->name('detalle_forma');
 

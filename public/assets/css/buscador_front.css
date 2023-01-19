@@ -127,13 +127,13 @@
     font-weight: bolder;
 }
 
-.tab_forma .flex-column .active {
+.tab_forma .variant-container.active {
     color: #fff !important;
     background-color: #f53b2e !important;
     font-weight: bolder;
 }
 
-.tab_forma .flex-column a:hover {
+.tab_forma .variant-container a:hover {
     color: #505d69;
 }
 
@@ -158,13 +158,13 @@
     font-weight: bolder;
 }
 
-.tab_decorativa .flex-column .active {
+.tab_decorativa .variant-container.active {
     color: #fff !important;
     background-color: #ff8800 !important;
     font-weight: bolder;
 }
 
-.tab_decorativa .flex-column a:hover {
+.tab_decorativa .variant-container a:hover {
     color: #505d69;
 }
 
@@ -189,13 +189,13 @@
     font-weight: bolder;
 }
 
-.tab_arqueometrica .flex-column .active {
+.tab_arqueometrica .variant-container.active {
     color: #fff !important;
     background-color: #c2aa09 !important;
     font-weight: bolder;
 }
 
-.tab_arqueometrica .flex-column a:hover {
+.tab_arqueometrica .variant-container a:hover {
     color: #505d69;
 }
 

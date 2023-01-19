@@ -1,5 +1,5 @@
 @php $rand = rand() @endphp
-<div id="mapa_{{ $pieza_clave->pieza_clave }}_{{ $rand }}" style="width: auto; height: 400px;"></div>
+<div id="mapa_{{ $pieza_clave->pieza_clave }}_{{ $rand }}" style="width: auto; height: 400px;border-radius: 15px"></div>
 
 <div class="container-fluid p-3">
     <!-- Range slider: -->
@@ -35,7 +35,7 @@
 
     @endforeach
 
-    let slider_{{ $pieza_clave->id }}_{{ $rand }} = new Slider("#buscador_cronologia_{{ $pieza_clave->pieza_clave }}_{{ $rand }}", {
+    var slider_{{ $pieza_clave->id }}_{{ $rand }} = new Slider("#buscador_cronologia_{{ $pieza_clave->pieza_clave }}_{{ $rand }}", {
         ticks: [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4100, 4200, 4300, 4400, 4500, 4600, 4700, 4800, 4900, 5000, 5100, 5200, 5300, 5400, 5500, 5600, 5700, 5800, 5900, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7600, 7700, 7800],
         ticks_positions: [0, 6, 13, 19, 26, 32, 38, 45, 51, 53, 54, 55, 56, 58, 59, 60, 62, 63, 64, 65, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 85, 86, 87, 88, 90, 91, 92, 94, 95, 96, 97, 99, 100],
         ticks_snap_bounds: 200,
