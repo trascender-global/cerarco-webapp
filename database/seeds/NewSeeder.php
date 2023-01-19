@@ -7,7 +7,9 @@ use App\Models\PiezaClaveCampos;
 use App\Models\Listas;
 use App\Models\ListaValores;
 use App\Models\PiezaClaveCategorias;
+use App\Models\PiezaClaveDato;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class NewSeeder extends Seeder
@@ -135,6 +137,7 @@ class NewSeeder extends Seeder
         /**
          * Petrografia Pieza clave campos
          */
+
         PiezaClaveCampos::create([
             'campo' => 'Porosidad (pasta)',
             'slug' => Str::kebab('pet porosidad pasta'),
@@ -176,6 +179,7 @@ class NewSeeder extends Seeder
             'slug' => Str::kebab('micro composicion'),
             'pieza_clave_categorias_id' => config('constants.pieza_clave_categorias.microscopio_electronico_de_barrido')
         ]);
-        
+        DB::table('pieza_clave_datos')->where('posicion',93)->delete();
+        DB::table('pieza_clave_campos')->where('id',93)->delete();
     }
 }

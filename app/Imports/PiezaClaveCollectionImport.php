@@ -36,7 +36,7 @@ class PiezaClaveCollectionImport implements ToCollection
                 if (is_null($data)) {
                     continue;
                 }
-                $campo = trim($data[0]);
+                $campo = trim($config['nombre']);
                 $valor = self::getValor($data, 1);
                 if (self::piezaClavenDoesntExist($piezaClave, $config)) {
                     $piezaClave = self::createPiezaClave($valor, $modelo);

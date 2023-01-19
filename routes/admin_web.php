@@ -98,7 +98,11 @@ Route::middleware('is-admin')
 
             Route::get("listado/", "FichasController@listadoFichas")
                 ->name('listado');
-
+                Route::get("penditenes/", "FichasController@pendienteFichas")
+                ->name('penditenes');
+                Route::post("accept_ficha/", "FichasController@acceptFichas")
+                ->name('accept_ficha');
+                
             Route::post("listado/", "FichasController@busquedaListadoFichas")
                 ->name('listado_busqueda');
 

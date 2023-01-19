@@ -9336,8 +9336,7 @@ a[data-toggle="collapse"] {
 }
 
 .carousel {
-    height: 600px;
-    max-height: 600px;
+    height: auto;
 }
 
 .carousel-inner .carousel-item {
@@ -9346,13 +9345,15 @@ a[data-toggle="collapse"] {
     background-size: 100% auto;
     background-position: center top;
     background-repeat: no-repeat;
-    height: 600px;
+    height: auto;
+    border-radius:15px;
 }
 
 .carousel-inner img {
-  height: 600px;
-  width: auto !important;
+  height: auto;
+  width: 100% !important;
   margin: auto;
+  border-radius: 15px;
 }
 
 @media (max-width: 768px) {

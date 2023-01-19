@@ -1,12 +1,20 @@
 @extends('layouts.master')
 
-@section('title') Listado Usuarios @endsection
+@section('title')
+    Listado Usuarios
+@endsection
 
 @section('content')
     @component('common-components.breadcrumb')
-        @slot('title') Listado Usuarios @endslot
-        @slot('li_1') Usuarios @endslot
-        @slot('li_2') Listado Usuarios @endslot
+        @slot('title')
+            Listado Usuarios
+        @endslot
+        @slot('li_1')
+            Usuarios
+        @endslot
+        @slot('li_2')
+            Listado Usuarios
+        @endslot
     @endcomponent
 
     <div class="row">
@@ -30,7 +38,8 @@
                                         <button type="submit" class="btn btn-info btn-block">Buscar</button>
                                     </div>
                                     <div class="mb-3">
-                                        <a href="{{ route('admin.usuarios.crear') }}" class="btn btn-success btn-block">Crear Usuario</a>
+                                        <a href="{{ route('admin.usuarios.crear') }}"
+                                            class="btn btn-success btn-block">Crear Usuario</a>
                                     </div>
                                 </div>
                             </div>
@@ -45,37 +54,60 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
-                        </tr>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
                         </thead>
 
                         <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    <a class="btn btn-sm btn-info btn-rounded waves-effect waves-light" href="{{ route('admin.usuarios.editar', compact('user')) }}">
-                                        <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form action="{{ route('admin.usuarios.borrar', compact('user')) }}" onsubmit="confirm('Desea borrar esta usuario?')" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger btn-rounded waves-effect waves-light" href="">
-                                            <i class="mdi mdi-close d-block font-size-16"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @switch($user->role_id)
+                                            @case(2)
+                                                Administrador
+                                            @break
+
+                                            @case(3) 
+                                                Usuario
+                                            @break
+
+                                            @case(4)
+                                                Editor
+                                            @break
+
+                                            @default
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-info btn-rounded waves-effect waves-light"
+                                            href="{{ route('admin.usuarios.editar', compact('user')) }}">
+                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('admin.usuarios.borrar', compact('user')) }}"
+                                            onsubmit="confirm('Desea borrar esta usuario?')" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-sm btn-danger btn-rounded waves-effect waves-light"
+                                                href="">
+                                                <i class="mdi mdi-close d-block font-size-16"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 

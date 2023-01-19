@@ -37,7 +37,7 @@ class UsuariosAdminController extends Controller
             $user->password = Hash::make($request->get('password'));
         }
         $user->save();
-        return redirect()->route('admin.usuarios.editar', compact('user'));
+        return redirect()->route('admin.usuarios.listado', compact('user'));
     }
 
     public function salvar(UsuariosSalvarRequest $request)
@@ -46,11 +46,11 @@ class UsuariosAdminController extends Controller
             'name'              => $request->get('nombre'),
             'email'             => $request->get('email'),
             'role_id'           => $request->get('rol'),
-            'password'          => Hash::make('password'),
+            'password'          => Hash::make($request->get('password')),
             'email_verified_at' => Carbon::now(),
         ]);
 
-        return redirect()->route('admin.usuarios.editar', compact('user'));
+        return redirect()->route('admin.usuarios.listado');
     }
 
     public function editar(User $user)

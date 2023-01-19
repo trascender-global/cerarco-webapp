@@ -15,10 +15,10 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        if ($this->isAdmin()) {
-            return redirect()
-                ->route('admin.index');
-        }
+        // if ($this->isAdmin()) {
+        //     return redirect()
+        //         ->route('admin.index');
+        // }
         return view('front.index');
     }
 

@@ -99,7 +99,9 @@
                                 <th>Decoracion 3</th>
                                 <th>Tratamiento Superficie</th>
                                 <th>Editar</th>
+                                @if (Auth::user()->role_id!=4)
                                 <th>Eliminar</th>
+                                @endif
                             </tr>
                             </thead>
 
@@ -119,20 +121,23 @@
                                         {{ $modelo->piezasClave->first()->datos()->busqueda(config('busqueda.tratamiento_superficie'))->get()->first()->getAttribute('valor') }}
                                     @endif
                                         </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-info btn-rounded waves-effect waves-light" href="{{ route( 'admin.ficha.editar_ficha', compact('modelo')) }}">
-                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route( 'admin.ficha.borrar_ficha', compact('modelo')) }}" onsubmit="confirm('Desea borrar esta ficha?')" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger btn-rounded waves-effect waves-light" href="">
-                                                <i class="mdi mdi-close d-block font-size-16"></i>
-                                            </button>
-                                        </form>
-                                    </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-info btn-rounded waves-effect waves-light" href="{{ route( 'admin.ficha.editar_ficha', compact('modelo')) }}">
+                                                <i class="mdi mdi-pencil d-block font-size-16"></i>
+                                            </a>
+                                        </td>
+                                        @if (Auth::user()->role_id!=4)
+                                        <td>
+                                            <form action="{{ route( 'admin.ficha.borrar_ficha', compact('modelo')) }}" onsubmit="confirm('Desea borrar esta ficha?')" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger btn-rounded waves-effect waves-light" href="">
+                                                    <i class="mdi mdi-close d-block font-size-16"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
+                                    
                                 </tr>
                             @endforeach
                             </tbody>

@@ -52,7 +52,11 @@
                     aria-controls="microscopio-electronico-de-barrido-{{ $pieza_clave }}" aria-selected="false">
                     <p class="font-weight-bold mt-1 mb-1">Microscopio electronico</p>
                 </a>
-                
+                <a class="nav-link" id="bibliografia-tab-{{ $pieza_clave }}" data-toggle="pill"
+                    href="#bibliografia-{{ $pieza_clave }}" role="tab"
+                    aria-controls="bibliografia-{{ $pieza_clave }}" aria-selected="false">
+                    <p class="font-weight-bold mt-1 mb-1">Bibliografía</p>
+                </a>
             </div>
         </div>
         <div class="col-xl-10 col-sm-9">
@@ -234,7 +238,18 @@
                                 @endforeach
                             </div>
                         </div>
-                        
+                        <div class="tab-pane fade" id="bibliografia-{{ $pieza_clave }}"
+                            role="tabpanel" aria-labelledby="bibliografia">
+                            <div class="shadow-none mb-0">
+                                @foreach (\App\Models\PiezaClaveCategorias::find(config('constants.pieza_clave_categorias.otros'))->campos as $campo)
+                                    @include('admin.fichas.variantes.pieza_clave.campos', [
+                                        'campo' => $campo,
+                                        'dato' => $piezas_clave_datos->where('posicion', $campo->id)->first(),
+                                        'pieza_clave' => $pieza,
+                                    ])
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

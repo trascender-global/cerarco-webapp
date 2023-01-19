@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\BusquedaTrait;
 use App\Http\Traits\MapaPuntosTrait;
 use App\Imports\FichasImport;
+use App\Models\Forum;
+use App\Models\ForumTopic;
 use App\Models\Foto;
 use App\Models\FotosVariante;
+use App\Models\Like;
 use App\Models\ListaValores;
 use App\Models\MapaPunto;
 use App\Models\Modelo;
@@ -16,6 +19,7 @@ use App\Models\PiezaClaveDato;
 use App\Models\PiezaClaveCampos;
 use App\Models\PiezaClaveDibujos;
 use App\Models\PiezaClaveFotos;
+use App\Models\TopicMessage;
 use App\Services\Fichas;
 use App\Services\Modelos;
 use App\Services\PiezaClaveService;
@@ -186,6 +190,9 @@ class FichasController extends Controller
         $modelo->metadata_forma         = $dataForma;
         $modelo->metadata_decorativa    = $dataDecorativa;
         $modelo->metadata_arqueometrica = $dataArqueometrica;
+        if($request->user()->role_id==4){
+            $modelo->status=0;
+        }
         $modelo->save();
 
         return response()->json(['request' => $modelo]);
@@ -328,6 +335,10 @@ class FichasController extends Controller
                         $ruta = $dir . $ficha->getClientOriginalName();
                         copy($ficha->getRealPath(), $ruta);
                         $modelo->archivo = $ficha->getClientOriginalName();
+                        if($request->user()->role_id==4){
+                            $modelo->status=0;
+                        }
+                        
                         $modelo->save();
                     } catch (Throwable $e) {
                     }
@@ -341,6 +352,7 @@ class FichasController extends Controller
                         ->withType('danger');
                 }
             }
+            
             return redirect()->route(
                 'admin.ficha.editar_ficha',
                 ['modelo' => Modelo::ultimo_modelo()->codigo]
@@ -348,15 +360,38 @@ class FichasController extends Controller
         }
         return redirect()->back();
     }
-
-
     function listadoFichas(Request $request)
     {
-        $modelos = Modelo::paginate(20);
-        return view('admin.fichas.listado_fichas', compact('modelos'));
+        if($request->user()->role_id==4){
+            $modelos = Modelo::where('user_id',$request->user()->id)->where('status',NULL)->orderBy('codigo')->paginate(50);
+            return view('admin.fichas.listado_fichas', compact('modelos'));
+        }else{
+           $modelos = Modelo::where('status',NULL)->orderBy('codigo')->paginate(50);
+            return view('admin.fichas.listado_fichas', compact('modelos')); 
+        }
+        
     }
+    function pendienteFichas(Request $request)
+    {
+        if($request->user()->role_id==4){
+            $modelos = Modelo::where('user_id',$request->user()->id)->where('status',0)->paginate(20);
+            return view('admin.fichas.pendiente_fichas', compact('modelos'));
+        }else{
+           $modelos = Modelo::where('status',0)->paginate(20);
+        return view('admin.fichas.pendiente_fichas', compact('modelos')); 
+        }
+        
+    }
+    function acceptFichas(Request $request)
+    {
+        $modelo=Modelo::find($request->modelo);
+        $modelo->status=NULL;
+        $modelo->save();
+        return response()->json(['status',true]);
+    }
+    
 
-    function busquedaListadoFichas()
+    function busquedaListadoFichas(Request $request)
     {
         session()->flash('todos', DB::table('pieza_clave_datos')
             ->select('pieza_clave_id')
@@ -368,8 +403,14 @@ class FichasController extends Controller
         $collection = $collection->intersect(self::obtenerBusqueda('confiabilidad_modelo', config('busqueda.confiabilidad_modelo')));
         session()->forget('todos');
 
-        $modelos = Modelo::whereIn('id', self::obtenerModelosBusquedaId($collection))->paginate(20);
+        if($request->user()->role_id==4){
+            $modelos = Modelo::where('user_id',$request->user()->id)->where('status',NULL)->whereIn('id', self::obtenerModelosBusquedaId($collection))->paginate(50);
         return view('admin.fichas.listado_fichas', compact('modelos'));
+        }else{
+            $modelos = Modelo::where('status',NULL)->whereIn('id', self::obtenerModelosBusquedaId($collection))->paginate(50);
+            return view('admin.fichas.listado_fichas', compact('modelos'));
+        }
+        
     }
 
     /**
@@ -667,6 +708,13 @@ class FichasController extends Controller
 
         try {
             DB::transaction(function () use ($modelo) {
+                $forum=Forum::where('modelo_id',$modelo->id)->first();
+                if($forum){
+                    ForumTopic::where('forum_id',$forum->id)->first()->delete();
+                    TopicMessage::where('forum_id',$forum->id)->first()->delete();
+                    Like::where('forum_id',$forum->id)->first()->delete();
+                    $forum->delete();
+                }
                 $modelo->piezasClave->map(function (PiezaClave $pieza_clave) {
                     $pieza_clave->dibujos()->forceDelete();
                     $pieza_clave->puntos()->forceDelete();
